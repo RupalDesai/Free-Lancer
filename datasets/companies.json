@@ -1,0 +1,58 @@
+{
+    "_id": "d0975326-7b43-479e-a109-cb818abec62d",
+    "name": "Morgan Stanley",
+    "email": "careers@morganstanley.com",
+    "mobile": "987-654-3210",
+    "logo": "/assets/images/logo/morgan-stanley.jpg",
+    "projects": [
+        {
+            "_id": "7b7997a2-c0d2-4f8c-b27a-6a1d4b5b6311",
+            "title": "Wealth Management System",
+            "desc": "An online loan website would allow AccionMFB to access online application, website, application information from any convenient location, using a single user ID and password. They would be able to do transactions online. The central goal of this initiative is to transform the day-to-day operations of the Bank by reducing paperwork; putting information services and transaction online; streamlining access to information, applicant’s results and content. Making it easy for applicants to find and use online services, and thus increasing the likelihood that the Bank can attain the strategic goals laid out in this initiative. I used a combination of surveys, focus groups, and one-on-one interviews to gather information from AccionMFB, staff, and from key personnel at other institutions that have related system.",
+            "position": "Java Developer",
+            "technologies": ["Java", "MySQL", "Sprint", "REST", "Apache Tomcat"],
+            "startDate": "04/06/2018",
+            "endDate": "08/10/2018",
+            "hours": "40"
+        },
+        {
+            "_id": "7b7997a2-c0d2-4f8c-b27a-6a1d4b5b6310",
+            "title": "Web Management System",
+            "desc": "An online loan website would allow AccionMFB to access online application, website, application information from any convenient location, using a single user ID and password. They would be able to do transactions online. The central goal of this initiative is to transform the day-to-day operations of the Bank by reducing paperwork; putting information services and transaction online; streamlining access to information, applicant’s results and content. Making it easy for applicants to find and use online services, and thus increasing the likelihood that the Bank can attain the strategic goals laid out in this initiative. I used a combination of surveys, focus groups, and one-on-one interviews to gather information from AccionMFB, staff, and from key personnel at other institutions that have related system.",
+            "position": "Web Developer",
+            "technologies": ["HTML", "CSS", "MongoDB", "JavaScript", "NodeJs"],
+            "startDate": "04/06/2018",
+            "endDate": "08/10/2018",
+            "hours": "40"
+        }
+    ]
+}
+{
+    "_id": "d0976666-7b43-479e-a109-cb820abec62d",
+    "name": "Goldsman Sach",
+    "email": "careers@gs.com",
+    "mobile": "987-456-3210",
+    "logo": "/assets/images/logo/goldsman-sach.jpg",
+    "projects": [
+        {
+            "_id": "7c7997a2-c0d2-4f8c-b27a-6a1d4b5b6333",
+            "title": "Bank Management System",
+            "desc": "An online loan website would allow AccionMFB to access online application, website, application information from any convenient location, using a single user ID and password. They would be able to do transactions online. The central goal of this initiative is to transform the day-to-day operations of the Bank by reducing paperwork; putting information services and transaction online; streamlining access to information, applicant’s results and content. Making it easy for applicants to find and use online services, and thus increasing the likelihood that the Bank can attain the strategic goals laid out in this initiative. I used a combination of surveys, focus groups, and one-on-one interviews to gather information from AccionMFB, staff, and from key personnel at other institutions that have related system.",
+            "position": "Java Developer",
+            "technologies": ["Java", "MySQL", "Sprint", "REST", "Apache Tomcat"],
+            "startDate": "04/10/2018",
+            "endDate": "08/14/2018",
+            "hours": "35"
+        },
+        {
+            "_id": "7c7997a2-c0d2-4f8c-b27a-6a1d4b5b6334",
+            "title": "Finance Management System",
+            "desc": "An online loan website would allow AccionMFB to access online application, website, application information from any convenient location, using a single user ID and password. They would be able to do transactions online. The central goal of this initiative is to transform the day-to-day operations of the Bank by reducing paperwork; putting information services and transaction online; streamlining access to information, applicant’s results and content. Making it easy for applicants to find and use online services, and thus increasing the likelihood that the Bank can attain the strategic goals laid out in this initiative. I used a combination of surveys, focus groups, and one-on-one interviews to gather information from AccionMFB, staff, and from key personnel at other institutions that have related system.",
+            "position": "Web Developer",
+            "technologies": ["HTML", "CSS", "MongoDB", "JavaScript", "NodeJs"],
+            "startDate": "04/06/2018",
+            "endDate": "08/10/2018",
+            "hours": "45"
+        }
+    ]
+}
