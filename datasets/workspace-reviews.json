@@ -1,0 +1,54 @@
+{
+    "_id": "7b7997a2-d0c2-4c8f-a27b-6a1d4b5b6315",
+    "totalReviews": "2",    
+    "userReviews": [
+        {
+            "_id": "7b7997a2-d0d2-4f8c-b27a-6a1d4b5b6350",
+            "name": "Robert Dias",
+            "email": "robertd@gmail.com",
+            "comment": "Peaceful place to work in.",
+            "rating": "4.4"
+        },
+        {
+            "_id": "7b7997a2-d0d2-4f8c-b27a-6a1d4b5b6360",
+            "name": "Michelle Alva",
+            "email": "michellea@aol.com",
+            "comment": "Good place",
+            "rating": "4.0"
+        }
+    ]
+}
+{
+    "_id": "f82c6b8a-2c6a-45e2-887f-ad5f34631439",
+    "totalReviews": "4",    
+    "userReviews": [
+        {
+            "_id": "f82c6b8a-2c6a-45e2-887f-ad5f12345439",
+            "user_name": "Robert Dias",
+            "user_email": "robertd@gmail.com",
+            "comment": "Peaceful place to work in.",
+            "user_rating": "4.4"
+        },
+        {
+            "_id": "f82c6b8a-2c6a-45e2-887f-ad5f12346439",
+            "user_name": "Michelle Alva",
+            "user_email": "michellea@gmail.com",
+            "comment": "Good place",
+            "user_rating": "4.0"
+        },
+        {
+            "_id": "f82c6b8a-2c6a-45e2-887f-ad5f12347439",
+            "user_name": "Good Student",
+            "user_email": "student@stevens.edu",
+            "comment": "Best place to study!!",
+            "user_rating": "5.0"
+        },
+        {
+            "_id": "f82c6b8a-2c6a-45e2-887f-ad5f12348439",
+            "user_name": "Kriti Ruhela",
+            "user_email": "kruhela@stevens.edu",
+            "comment": "Best place to complete work in Hoboken",
+            "user_rating": "4.5"
+        }
+    ]   
+}
