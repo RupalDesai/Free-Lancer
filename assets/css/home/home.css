@@ -1,0 +1,38 @@
+#left-panel {
+    background-color: #e2e2e2;
+}
+#right-panel {
+    color: #fff;
+    background-color: #116466;
+}
+#left-panel, #right-panel {
+    display: inline-block;
+    height: 600px;
+    margin-bottom: 3em;
+    padding: 18% 5% 0;
+    text-align: center;
+    text-align: center;
+}
+#left-panel h1, #right-panel h1 {
+    font-size: 3em;
+    margin-bottom: 8px;
+}
+#left-panel p, #right-panel p {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+}
+#left-panel input, #right-panel input {
+    font-size: 1.5em;
+    height: 3.5em;
+    outline: none;
+    padding: 0 2.6em 0 1em;
+    width: 95%;
+}
+#left-panel span, #right-panel span {
+    position: absolute;
+    margin:1.5em 0 0 -3.4em; 
+}
+#left-panel span img, #right-panel span img {
+    height: 2.5em;
+    width: 2.5em;
+}
