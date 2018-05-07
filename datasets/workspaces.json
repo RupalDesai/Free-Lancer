@@ -14,7 +14,7 @@
     "_id": "7c7997a2-c0d2-4f8c-b27a-6a1d4b5b6320",
     "name": "William Library",
     "email": "wlibrary@stevens.edu",
-    "mobile": "551-456-7890",
+    "phone": "551-456-7890",
     "address": "9th Street, Hoboken, NJ 07030",
     "type": "Library",
     "openAt": "0600",

@@ -1,5 +1,4 @@
-/* database configuration */
-const MongoClient = require('mongodb').MongoClient;;
+const MongoClient = require("mongodb").MongoClient;
 
 const settings = {
     mongoConfig: {
@@ -8,18 +7,17 @@ const settings = {
     }
 };
 
-let fullMongoUrl = settings.mongoConfig.serverUrl + settings.mongoConfig.database;
+const mongoConfig = settings.mongoConfig;
+
+let fullMongoUrl = `${mongoConfig.serverUrl}`;
 let _connection = undefined;
+let _db = undefined;
 
-let connectDb = () => {
-    if (!_connection) {
-        _connection = MongoClient.connect(fullMongoUrl)
-            .then((db) => {
-                return db;
-            });
-    }
+module.exports = async () => {
+  if (!_connection) {
+    _connection = await MongoClient.connect(fullMongoUrl);
+    _db = await _connection.db(mongoConfig.database);
+  }
 
-    return _connection;
+  return _db;
 };
-
-module.exports = connectDb;

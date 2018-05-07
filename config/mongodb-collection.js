@@ -1,21 +1,17 @@
-/* database collection configuration */
-const dbConnection = require('./mongodb-connection');
+const dbConnection = require("./mongodb-connection");
 
-/* This will allow to have one reference to each collection per app */
-let getCollectionFn = (collection) => {
-    let _col = undefined;
+const getCollectionFn = collection => {
+  let _col = undefined;
 
-    return () => {
-        if (!_col) {
-
-            _col = dbConnection().then((db) => {
-                return db.collection(collection);
-            });
-        }
-
-        return _col;
+  return async () => {
+    if (!_col) {
+      const db = await dbConnection();
+      _col = await db.collection(collection);
     }
-}
+
+    return _col;
+  };
+};
 
 /* listing collections here: */
 module.exports = {

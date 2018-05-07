@@ -29,9 +29,14 @@ const static = express.static(__dirname + '/assets');
 app.use("/assets", static);
 
 /* view or handlebars configuration */
-// handlebarsIntl.registerWith(handlebars);    // handlebars formatting
-// handlebars.registerHelper('paginate', handlebarsPaginate);  // paging
-app.engine('handlebars', exphbs({ defaultLayout:'main' }));
+var hbsHelpers = exphbs.create({
+    // Specify helpers which are only registered on this instance.
+    helpers: require('./assets/helpers/handlebars'),
+    defaultLayout: 'main',
+    extname: '.handlebars'
+});
+
+app.engine('handlebars', hbsHelpers.engine);
 app.set('view engine', 'handlebars');
 
 /* routing configuration */
