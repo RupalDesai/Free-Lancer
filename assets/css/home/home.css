@@ -41,32 +41,58 @@
 /**
  * Lastest trending job section
  */
-#recent-jobs {
-    background-color: #2c3531;
+
+#recent-jobs, #recent-workspaces {
     margin-bottom: 1em;
     padding: 3em;
 }
-#recent-jobs h1 {
+#recent-jobs {
+    background-color: #2c3531;
+ }
+#recent-workspaces {
+    background-color: #116466;
+} 
+
+#recent-jobs h1, #recent-workspaces h1 {
     color: #fff;
     margin-bottom: 1em;
 }
-#recent-jobs .job-item {
+#recent-jobs .item, #recent-workspaces .item {
     background-color: #e2e2e2;
     padding: 1em;
 }
-#recent-jobs .job-item > div {
+#recent-jobs .item > div, #recent-workspaces .item > div {
     margin-bottom: 1em;
+}
+#recent-jobs .item > div:first-child, #recent-workspaces .item > div:first-child {
+    margin-top: 1em;
+}
+#recent-workspaces .item > div:first-child {
+    padding: 0;
 }
 #recent-jobs img {
     height: 3em;
     width: 3em;
+    vertical-align: baseline;
 }
-#recent-jobs p {
+#recent-jobs p, #recent-workspaces p {
     text-align: justify;
     height: 6em;
+    margin: 0;
     overflow: hidden;
 }
-#recent-jobs a {
+#recent-jobs a, #recent-workspaces a {
+    border: 1px solid #2c3531;
     cursor: pointer;
+    display: block;
+    line-height: 2em;
+    padding: .8em 2em;
     text-align: center;
+    transition-duration: 1s;
+    width: 100%;
+}
+#recent-jobs a:hover, #recent-workspaces a:hover     {
+    background-color: #2c3531;
+    color: #e2e2e2;
+    transition-duration: 1s;
 }
