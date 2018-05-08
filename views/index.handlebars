@@ -25,20 +25,26 @@
         <div class="col-sm-12">
             <h1>Lastest Trending Jobs</h1>
             <div class="row">
-                {{#each workspaces}}
+                {{#each companies}}
                 <div class="item col-sm-3">
                     <div class="col-sm-12">
-                        <div class="col-sm-2"><img src="/assets/images/logos/morgan-stanley.png"></div>
-                        <div class="col-sm-10"><h2>Morgan Stanley</h2></div>
+                        <div class="col-sm-2"><img src={{logo}}></div>
+                        <div class="col-sm-10"><h2>{{name}}</h2></div>
+                    </div>
+                    {{#each projects}}
+                    {{#if @index}}
+                    {{else}}
+                    <div class="col-sm-12">
+                        <div><h3>{{position}}</h3></div>
+                        <div><b>Description: </b>{{shortDescription desc}} </div>
+                        <div><b>Technologies: </b>{{technologies}} </div>
                     </div>
                     <div class="col-sm-12">
-                        <div><h3>Web Developer</h3></div>
-                        <div><p>An online loan website would allow AccionMFB to access online application, website, application information from any convenient location, using a single user ID and password. They would be able to do transactions online. The central goal of this initiative is to transform the day-to-day operations of the Bank by reducing paperwork; putting information services and transaction online; streamlining access to information, applicant’s results and content. Making it easy for applicants to find and use online services, and thus increasing the likelihood that the Bank can attain the strategic goals laid out in this initiative. I used a combination of surveys, focus groups, and one-on-one interviews to gather information from AccionMFB, staff, and from key personnel at other institutions that have related system."</p></div>
+                        <div class="col-sm-5"><b>Hours: </b>{{hours}}</div>
+                        <div class="col-sm-7"><b>Starts at: </b>{{startDate}}</div>
                     </div>
-                    <div class="col-sm-12">
-                        <div class="col-sm-5"><b>Hours: </b>40</div>
-                        <div class="col-sm-7"><b>Starts at: </b>04/06/2018</div>
-                    </div>
+                    {{/if}}
+                    {{/each}}
                     <div class="col-sm-12">
                         <a>Apply Now</a>
                     </div>

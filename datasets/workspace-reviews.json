@@ -52,3 +52,36 @@
         }
     ]   
 }
+{
+    "_id": "92de4c84-2f09-43c3-88e2-c0a000b94098",
+    "totalReviews": "2",    
+    "userReviews": [
+        {
+            "_id": "92de4c84-2f09-43c3-77d2-a1a110b95090",
+            "name": "Kaysha Lloyd",
+            "email": "kayshal@yahoo.com",
+            "comment": "Peaceful place to work in. They serve best coffee too.",
+            "rating": "5"
+        },
+        {
+            "_id": "92de4c84-2f09-43c3-88e2-a1a110b95090",
+            "name": "Andrea Grut",
+            "email": "andreag@gmail.com",
+            "comment": "Silent and comfortable place to work in.",
+            "rating": "5"
+        }
+    ]
+}
+{
+    "_id": "92de4c84-2f09-43c3-88e2-a1c111b93033",
+    "totalReviews": "1",    
+    "userReviews": [
+        {
+            "_id": "98de4c84-2a89-43c3-88e2-a1c100b93033",
+            "name": "Sonal Pandey",
+            "email": "spandey@live.com",
+            "comment": "Clean and peaceful office space.",
+            "rating": "4.8"
+        }
+    ]
+}

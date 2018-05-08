@@ -1,18 +1,18 @@
-/* Workspace Collection
+/* Workspaces Reviews Collection
  * Data Access Object *
- * Workspace Controllers for DAO actions *
+ * Workspaces Reviews Controllers for DAO actions *
 */
 
 /* importing required files and packages */
 const mongoDbCollection = require('../config/mongodb-collection');
-const workspaces = mongoDbCollection.workspaces;
+const workspacesReviews = mongoDbCollection.workspaces;
 
 /* exporting controllers apis */
-module.exports = workspacesControllers = {
+module.exports = reviewsControllers = {
     /**
      * @returns {Array} List of all workspaces in the database
      */
-    getWorkspaces: async function () {
+    getAllReviews: async function () {
         const workspacesCollection = await workspaces();
         let workspacesList = await workspacesCollection.find({}).toArray();
         if (workspacesList.length <= 0) {

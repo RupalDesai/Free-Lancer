@@ -5,6 +5,12 @@ var register = {
                 address = address.substring(0, 35) + '...';
             }
             return address;
+        },
+        shortDescription: function(desc) {
+            if (desc.length > 150) {
+                desc = desc.substring(0, 149) + '...';
+            }
+            return desc;
         }
     }
 };

@@ -22,3 +22,27 @@
     "rating": "4.48",
     "reviewsId": "f82c6b8a-2c6a-45e2-887f-ad5f34631439"
 }
+{
+    "_id": "92de4c84-2f09-43c3-88e2-c0a000b93037",
+    "name": "Port of Entry",
+    "email": "bestcafe@poe.org",
+    "phone": "201-346-7900",
+    "address": "555 Palisade Ave, Jersey City, NJ 07307",
+    "type": "Cafe",
+    "openAt": "0600",
+    "closeAt": "2000",
+    "rating": "5",
+    "reviewsId": "92de4c84-2f09-43c3-88e2-c0a000b94098"
+}
+{
+    "_id": "92de4c84-333a-43c3-88e2-a1c111b93037",
+    "name": "Tech Hub",
+    "email": "techhub@asl.org",
+    "phone": "551-366-7980",
+    "address": "400 Congress St, Jersey City, NJ 07307",
+    "type": "Office Space",
+    "openAt": "0900",
+    "closeAt": "1700",
+    "rating": "4.8",
+    "reviewsId": "92de4c84-2f09-43c3-88e2-a1c111b93033"
+}
