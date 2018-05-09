@@ -4,53 +4,33 @@
 */
 
 /* importing required files and packages */
-const mongoDbCollection = require('../config/mongodb-collection');
-const workspacesReviews = mongoDbCollection.workspaces;
+const mongoDbCollections = require('../config/mongodb-collection');
+const workspaceReviews = mongoDbCollections.workspaceReviews;
 
 /* exporting controllers apis */
 module.exports = reviewsControllers = {
     /**
-     * @returns {Array} List of all workspaces in the database
+     * @returns {Array} List of all reviews on workspace in the database
      */
     getAllReviews: async function () {
-        const workspacesCollection = await workspaces();
-        let workspacesList = await workspacesCollection.find({}).toArray();
-        if (workspacesList.length <= 0) {
-            throw "Server issue in getting workspaces list with 'workspaces' collection";
+        const reviewsCollection = await workspaceReviews();
+        const reviewInfo = await reviewsCollection.find({}).toArray();
+        if (reviewInfo === null) {
+            throw "Server issue in fetching workspace reviews";
         }
-        return workspacesList;
+        return reviewInfo;
     },
 
     /**
-     * @returns {Array} List of top four workspaces
+     * @returns {String} A top review comment
      */
-    getTopFourWorkspaces: async function () {
-        try {
-            let workspacesList = await this.getWorkspaces();
-            let workspaceCount = workspacesList.length;
-            
-            if (workspaceCount < 0) {
-                throw "Server issue in getting workspaces list with 'workspaces' collection";
-            } else if (workspaceCount > 4) {
-                workspacesList = workspacesList.slice(0, 3);
-            } 
-            return workspacesList;
-        } catch(err) {
-            throw err;
+    getReviewById: async function(id) {
+        if (!id) throw "Please provide the reviews id";
+        const reviewsCollection = await workspaceReviews();
+        const reviewInfo = await reviewsCollection.findOne({ _id: id });
+        if (reviewInfo === null) {
+            throw "Server issue in fetching workspace reviews by id";
         }
-    },
-
-    /**
-     * @returns {Object} An object of workspace
-     */
-    getWorkspaceById: async function(id) {
-        if (!id) throw "Please provide the workspace id";
-        
-        const workspacesCollection = await workspaces();
-        const workspaceInfo = await workspacesCollection.findOne({ _id: id});
-        if (workspaceInfo === null) {
-            throw "Server issue in fetching workspace by id";
-        }
-        return workspaceInfo;
+        return reviewInfo.userReviews[0].comment;
     }
 };

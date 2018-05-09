@@ -16,7 +16,7 @@ module.exports = companiesControllers = {
         const companiesCollection = await companies();
         let companiesList = await companiesCollection.find({}).toArray();
         if (companiesList.length <= 0) {
-            throw "Server issue in getting companies list with 'companies' collection";
+            throw "Server issue in fetching companies list with 'companies' collection";
         }
         return companiesList;
     },
@@ -29,10 +29,10 @@ module.exports = companiesControllers = {
             let companiesList = await this.getCompanies();
             let companiesCount = companiesList.length;
             
-            if (companiesCount < 0) {
-                throw "Server issue in getting companies list with 'companies' collection";
+            if (companiesCount <= 0) {
+                throw "Server issue in fetching companies list with 'companies' collection";
             } else if (companiesCount > 4) {
-                companiesList = companiesList.slice(0, 3);
+                companiesList = companiesList.slice(0, 4);
             } 
             return companiesList;
         } catch(err) {
@@ -47,7 +47,7 @@ module.exports = companiesControllers = {
         if (!id) throw "Please provide the company id";
         
         const companiesCollection = await companies();
-        const companyInfo = await companiesCollection.findOne({ _id: id});
+        const companyInfo = await companiesCollection.findOne({ _id: id });
         if (companyInfo === null) {
             throw "Server issue in fetching company by id";
         }

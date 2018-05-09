@@ -26,7 +26,6 @@ router.get('/', async (req, res) => {
             workspaces: workspacesList
         });
     } catch (err) {
-        console.log("d");
         res.status(404).json({ error: err });
     }
 });

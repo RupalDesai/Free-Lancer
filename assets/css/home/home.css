@@ -57,10 +57,16 @@
     color: #fff;
     margin-bottom: 1em;
 }
+#recent-jobs .col-sm-3, #recent-workspaces .col-sm-3 {
+    max-width: 24.3% !important;
+}
 #recent-jobs .item, #recent-workspaces .item {
     background-color: #e2e2e2;
     margin-right: 1em;
     padding: 1em;
+}
+#recent-jobs .item > div.col-sm-12:first-child {
+    padding: 0;
 }
 #recent-jobs .item:last-child, #recent-workspaces .item:last-child {
     margin-right: 0;
@@ -84,6 +90,9 @@
     height: 6em;
     margin: 0;
     overflow: hidden;
+}
+#recent-jobs p {
+    height: 4.5em;
 }
 #recent-jobs a, #recent-workspaces a {
     border: 1px solid #2c3531;

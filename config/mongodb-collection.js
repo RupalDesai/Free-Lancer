@@ -18,6 +18,6 @@ module.exports = {
     credentials: getCollectionFn("credentials"),
     companies: getCollectionFn("companies"),
     workspaces: getCollectionFn("workspaces"),
-    workspacesReviews: getCollectionFn("workspaces-reviews"),
+    workspaceReviews: getCollectionFn("workspaceReviews"),
     users: getCollectionFn("users")
 };

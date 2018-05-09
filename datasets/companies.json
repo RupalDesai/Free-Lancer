@@ -32,7 +32,7 @@
     "name": "Goldman Sachs",
     "email": "careers@gs.com",
     "mobile": "987-456-3210",
-    "logo": "/assets/images/logo/goldman-sachs.png",
+    "logo": "/assets/images/logos/goldman-sachs.png",
     "projects": [
         {
             "_id": "7c7997a2-c0d2-4f8c-b27a-6a1d4b5b6333",
@@ -61,7 +61,7 @@
     "name": "Siemens",
     "email": "careers@sm.com",
     "mobile": "991-470-3410",
-    "logo": "/assets/images/logo/siemens.jpg",
+    "logo": "/assets/images/logos/siemens.jpg",
     "projects": [
         {
             "_id": "a0975556-7c43-479e-a109-ac777abea55d",
@@ -90,7 +90,7 @@
     "name": "Société Générale",
     "email": "careers@sg.com",
     "mobile": "551-470-3250",
-    "logo": "/assets/images/logo/societe-generale.jpg",
+    "logo": "/assets/images/logos/societe-generale.jpg",
     "projects": [
         {
             "_id": "a0235556-7b43-555f-f420-ab820aabc55d",
@@ -109,7 +109,7 @@
     "name": "Amazon",
     "email": "careers@az.com",
     "mobile": "201-333-5420",
-    "logo": "/assets/images/logo/amazon.png",
+    "logo": "/assets/images/logos/amazon.png",
     "projects": [
         {
             "_id": "d2089756-7b43-479e-f420-ab820abec667",
@@ -138,7 +138,7 @@
     "name": "Google",
     "email": "careers@ggl.com",
     "mobile": "917-333-3320",
-    "logo": "/assets/images/logo/google.png",
+    "logo": "/assets/images/logos/google.png",
     "projects": [
         {
             "_id": "b2089756-7b54-479f-f420-ab776bbea55d",

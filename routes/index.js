@@ -13,12 +13,11 @@ const mainRoutes = (app) => {
 
     /* non existing page configuration */
     app.use("*", (req, res) => {
-        res.render('alerts/error', {
+        res.render('components/errors', {
             mainTitle: "Page Not Found •",
             code: 404,
             message: `Page Not Found`,
-            url: req.originalUrl,
-            user: req.user
+            //user: req.user
         });
     });
 };

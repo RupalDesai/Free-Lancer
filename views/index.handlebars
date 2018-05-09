@@ -28,23 +28,22 @@
                 {{#each companies}}
                 <div class="item col-sm-3">
                     <div class="col-sm-12">
-                        <div class="col-sm-2"><img src={{logo}}></div>
+                        <div class="col-sm-2"><img src='{{logo}}'></div>
                         <div class="col-sm-10"><h2>{{name}}</h2></div>
                     </div>
-                    {{#each projects}}
-                    {{#if @index}}
-                    {{else}}
+
+                    {{#if projects}}
                     <div class="col-sm-12">
-                        <div><h3>{{position}}</h3></div>
-                        <div><b>Description: </b>{{shortDescription desc}} </div>
-                        <div><b>Technologies: </b>{{technologies}} </div>
+                        <div><h3>{{projects.[0].position}}</h3></div>
+                        <div><p><b>Description: </b>{{shortDescription projects.[0].desc}}</p></div>
+                        <div><p><b>Technologies: </b>{{arrayToString projects.[0].technologies}}</p></div>
                     </div>
                     <div class="col-sm-12">
-                        <div class="col-sm-5"><b>Hours: </b>{{hours}}</div>
-                        <div class="col-sm-7"><b>Starts at: </b>{{startDate}}</div>
+                        <div class="col-sm-5"><b>Hours: </b>{{projects.[0].hours}}</div>
+                        <div class="col-sm-7"><b>Starts: </b>{{projects.[0].startDate}}</div>
                     </div>
                     {{/if}}
-                    {{/each}}
+                    
                     <div class="col-sm-12">
                         <a>Apply Now</a>
                     </div>
@@ -68,11 +67,11 @@
                         <div class="col-sm-12"><b>Phone: </b> {{phone}}</div>
                     </div>
                     <div class="col-sm-12">
-                        <div><p><b>Review: </b>An online loan website would allow AccionMFB to access online application, website, application information from any convenient location, using a single user ID and password. They would be able to do transactions online. The central goal of this initiative is to transform the day-to-day operations of the Bank by reducing paperwork; putting information services and transaction online; streamlining access to information, applicant’s results and content. Making it easy for applicants to find and use online services, and thus increasing the likelihood that the Bank can attain the strategic goals laid out in this initiative. I used a combination of surveys, focus groups, and one-on-one interviews to gather information from AccionMFB, staff, and from key personnel at other institutions that have related system."</p></div>
+                        <div><p><b>Review: </b>{{review}}</p></div>
                     </div>
                     <div class="col-sm-12">
                         <div class="col-sm-6"><b>Rating: </b>{{rating}} / 5</div>
-                        <div class="col-sm-6"><b>Opens at: </b>{{openAt}}</div>
+                        <div class="col-sm-6"><b>Opens at: </b>{{opensAt}}</div>
                     </div>
                     <div class="col-sm-12">
                         <a href="/workspaces/book-now">Book Now</a>

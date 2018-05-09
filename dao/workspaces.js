@@ -4,8 +4,9 @@
 */
 
 /* importing required files and packages */
-const mongoDbCollection = require('../config/mongodb-collection');
-const workspaces = mongoDbCollection.workspaces;
+const mongoDbCollections = require('../config/mongodb-collection');
+const reviews = require('./workspaces-reviews');
+const workspaces = mongoDbCollections.workspaces;
 
 /* exporting controllers apis */
 module.exports = workspacesControllers = {
@@ -28,13 +29,19 @@ module.exports = workspacesControllers = {
         try {
             let workspacesList = await this.getWorkspaces();
             let workspaceCount = workspacesList.length;
-            
+
             if (workspaceCount < 0) {
                 throw "Server issue in getting workspaces list with 'workspaces' collection";
             } else if (workspaceCount > 4) {
-                workspacesList = workspacesList.slice(0, 3);
+                workspacesList = workspacesList.slice(0, 4);
             } 
-            return workspacesList;
+        
+            workspacesList.forEach(async workspace => {
+                let review = await reviews.getReviewById(workspace.reviewsId);
+                workspace['review'] = (review !== null) ? review : 'No user has posted a review on the particular workspace';
+            });
+
+            return await workspacesList;
         } catch(err) {
             throw err;
         }
