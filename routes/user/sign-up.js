@@ -23,7 +23,7 @@ function isLoggedIn(req, res, next) {
 
 /* global scoped function */
 router.get('/', isLoggedIn, (req, res) => {
-    res.render('user/signup', {
+    res.render('user/sign-up', {
         mainTitle: "Create an Account •",
         mainDescription: "Welcome to the Free Lancer | A search engine to find a best job and workspace."
     });
