@@ -3,7 +3,7 @@ const express = require('express');
 const usersRoutes = express.Router();
 
 /* payment route */
-usersRoutes.use("/signup", require('./signup')); // url: ~/user/signup
+usersRoutes.use("/sign-up", require('./sign-up')); // url: ~/user/signup
 
 /* non existing page configuration */
 usersRoutes.use("*", (req, res) => {
