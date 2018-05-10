@@ -1,5 +1,3 @@
-const aboutUsRoutes = require('./');
-
 /* importing required files and packages */
 const express = require('express');
 const infoRouters = express.Router();
