@@ -65,5 +65,4 @@ function submitSignupForm(formData) {
         },
         contentType: "application/json"
     });
-
 }
