@@ -1,14 +1,12 @@
-// const aboutUsRoutes = require('./');
-
 /* importing required files and packages */
 const express = require('express');
-const infoRouters = express.Router();
+const usersRoutes = express.Router();
 
 /* payment route */
-infoRouters.use("/about-us", require('./about-us')); // url: ~/info/about-us
+usersRoutes.use("/signup", require('./signup')); // url: ~/user/signup
 
 /* non existing page configuration */
-infoRouters.use("*", (req, res) => {
+usersRoutes.use("*", (req, res) => {
 	res.render('components/errors', {
 		mainTitle: "Page Not Found •",
 		code: 404,
@@ -17,4 +15,4 @@ infoRouters.use("*", (req, res) => {
 	});
 });
 
-module.exports = infoRouters;
+module.exports = usersRoutes;

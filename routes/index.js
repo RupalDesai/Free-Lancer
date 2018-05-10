@@ -1,8 +1,7 @@
 /* importing required files and packages */
 const homeRoutes = require('./home');
 const infoRoutes = require('./info');
-//const productsRoutes = require('./products/products-dao');
-//const usersRoutes = require('./users');
+const userRoutes = require('./user');
 
 const mainRoutes = (app) => {
 
@@ -11,7 +10,7 @@ const mainRoutes = (app) => {
 
     /* customized routes */
     app.use("/info", infoRoutes);
-    // app.use("/user", usersRoutes);          // user routes
+    app.use("/user", userRoutes);
 
     /* non existing page configuration */
     app.use("*", (req, res) => {

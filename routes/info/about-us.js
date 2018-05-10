@@ -9,7 +9,6 @@ const express = require('express');
 const router = express.Router();
 
 /* global scoped function */
-//------------------------ route to update user information by id
 router.get('/', async (req, res) => {
     res.render('static/about-us', {
         mainTitle: "About Us",
