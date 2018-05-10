@@ -12,6 +12,7 @@ const credential = dao.credentials;
 passport.use('user', new LocalStrategy({ usernameField:"email", passwordField:"password" }, async (email, password, done) => {
     email = xss(email);
     password = xss(password);
+    //yhn tak passport ne ek user naam ki cookie banai or usme function me user wail pr emad
 
     const credentialInfo = await credential.getCredentialByEmail(email);
     if (credentialInfo !== null ) {
