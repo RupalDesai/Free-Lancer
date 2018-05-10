@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #sign-up {
     margin-top: 1em;
 }
@@ -6,4 +7,17 @@
 }
 #sign-up form > div:first-child {
     padding: 0;
+=======
+#sign-up, #login, #forget-password {
+    margin-top: 1em;
+}
+#sign-up h1, #login h1, #forget-password h1 {
+    margin: 1em 0;
+}
+#sign-up form > div:first-child, #login form > div:first-child, #forget-password form > div:first-child {
+    padding: 0;
+}
+#sign-up .btn-primary, #login .btn-primary, #forget-password .btn-primary {
+    background-color: #116466;
+>>>>>>> f95c84fc1c46907581e3299a1675fcd7f2897a56
 }

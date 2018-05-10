@@ -9,10 +9,8 @@ const express = require('express');
 const router = express.Router();
 const workspaces = require('../../dao').workspaces;
 const companies = require('../../dao').companies;
-// const productsData = data.products;
 
 /* global scoped function */
-//------------------------ route to update user information by id
 router.get('/', async (req, res) => {
     try {
         let workspacesList = await workspaces.getTopFourWorkspaces();
@@ -29,5 +27,6 @@ router.get('/', async (req, res) => {
         res.status(404).json({ error: err });
     }
 });
+
 // exporting routing apis
 module.exports = router;
