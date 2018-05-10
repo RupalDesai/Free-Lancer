@@ -11,6 +11,28 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/main/header.css">
+    <link rel="stylesheet" href="/assets/css/main/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+        <script>
+            function submitForm() {
+             var username = document.getElementById("username").value;
+                var emailid = document.getElementById("email_id").value;
+                var phone = document.getElementById("phone").value;
+                var pwd = document.getElementById("password").value;
+                var cpwd = document.getElementById("cpassword").value;
+                var aoi = document.getElementById("aoi").value;
+                  {{!-- alert(username); --}}
+                if (username.length > 0 && emailid.length > 0 && phone.length > 0 && pwd.length >0  && cpwd.length > 0 && aoi.length>0) {
+                    var form = document.getElementsByTagName("form");
+                    {{!-- alert(form[0]); --}}
+                    form[0].submit();
+
+                    
+                } else {
+                    alert("Please fill the form completely");
+                } 
+            }
+        </script>
 </head>
 <body>
     <!-- header starts from here -->
@@ -38,7 +60,7 @@
                                      <a href="/workspaces">Workspaces</a>
                                 </li>
                                 <li class="col-sm-3">
-                                     <a href="/user/signin">Account</a>
+                                     <a href="users/signup">Account</a>
                                 </li>
                             </ul>
                         </div>

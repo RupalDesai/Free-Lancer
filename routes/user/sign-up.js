@@ -9,7 +9,7 @@ const express = require('express');
 const router = express.Router();
 const xss = require('xss');
 const validator = require('validator');
-// const passport = require('../../../config/passport-user');
+const passport = require('../../config/passport-user');
 const services = require('../../assets/helpers/services');
 const userData = require('../../dao').user;
 
@@ -38,48 +38,24 @@ router.post('/', async (req, res) => {
 
     // checking null values
     if(!username) {
-        res.render('user/signup', { 
-            mainTitle: "Create an Account •",
-            error: "Please provide your username." 
-        });
-        return;
+        res.status(400).send({ message: "Please provide your username." });
     } else if (!email) {
-        res.render('user/signup', {
-            mainTitle: "Create an Account •",
-            error: "Please provide your email id."
-        });
-        return;
+        res.status(400).send({ message: "Please provide your email id." });
     } else if (!password) {
-        res.render('user/signup', {
-            mainTitle: "Create an Account •",
-            error: "Please provide your account password." 
-        });
-        return;
+        res.status(400).send({ message: "Please provide your account password." });
     }
 
     // validating email syntax
     if (!validator.isEmail(email)) {
-        res.status(404).send({ error: "Invalid email id format." });
-        return;
+        res.status(400).send({ message: "Invalid email id format." });
     }
 
     // searching for an existing user
-    // try{
-    //     const userJsonDocument = await userData.getUserById(email);
-    //     if(userJsonDocument == null) {
-            const createUserDocument = await userData.createUser(username, email, password);
-        // } else {
-        //     res.status(400).send({ error: "This email id is already registered." });
-        // }
-    // } catch(error) {
-    //     res.render('components/errors', {
-    //         mainTitle: "Server Error •",
-    //         code: 500,
-    //         message: error
-    //         // url: req.originalUrl,
-    //         // user: req.user
-    //     });
-    // }
+    try {
+        const createUserDocument = await userData.createUser(username, email, password);
+    } catch(error) {
+        res.status(400).send({ message: error });
+    }
 });
 
 // exporting routing apis

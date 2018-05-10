@@ -47,13 +47,13 @@ module.exports = userControllers = {
                 throw "Server issue while creating user.";
             } else {
                 const isCredentialCreated = await credential.createCredential(email, password);
-                // let user = {
-                //     email: email,
-                //     password: password
-                // }
-                // passport.authenticate('user')(req, res, function() {
-                //     res.json({ success: true });
-                // });
+                let user = {
+                    email: email,
+                    password: password
+                }
+                passport.authenticate('user')(req, res, function() {
+                    res.json({ success: true });
+                });
             }
         } else {
             throw "User already exists.";

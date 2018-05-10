@@ -8,7 +8,7 @@
             <form id="signup-form" method="post" action="/user/sign-up">
                 <div class="form-group col-sm-12">
                     <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" maxlength="10">
                 </div>
                 <div class="form-group">
                     <label for="email">Email address</label>
@@ -16,15 +16,18 @@
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
+                    <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" maxlength="8">
                 </div>
                 <div class="form-group">
                     <label for="confirm-password">Comfirm Password</label>
-                    <input type="password" class="form-control" id="password" placeholder=" Confirm Password" name="confirm-password">
+                    <input type="password" class="form-control" id="password" placeholder=" Confirm Password" name="confirm-password" maxlength="8">
                 </div>
-                <button type="button" class="btn btn-primary">Create Account</button>
+                <button id="signup-btn" type="button" class="btn btn-primary">Create Account</button>
                 <button type="button" class="btn btn-primary" onclick="redirectToLogin()">Login</button>
             </form>
+            <div id="alert" class="alert">
+                <div id="alert-msg"></div>
+            </div>
         </div>
     </div>
 </div>
