@@ -9,6 +9,7 @@ const passport = require('passport');
 const bcrypt = require('bcrypt');
 const mongoDbCollections = require('../config/mongodb-collection');
 const user = mongoDbCollections.users;
+const credential = require('./credentials');
 
 /* exporting controllers apis */
 module.exports = userControllers = {
@@ -37,10 +38,6 @@ module.exports = userControllers = {
             username: username,
             email: email
         };
-        let userCredentials = {
-            email: email,
-            password: bcrypt.hashSync(password, 16)
-        }
 
         const userCollection = await user();
         const isUserExists = await userCollection.findOne({ email: email });
@@ -49,6 +46,7 @@ module.exports = userControllers = {
             if (isUserCreated.length === 0) {
                 throw "Server issue while creating user.";
             } else {
+                const isCredentialCreated = await credential.createCredential(email, password);
                 // let user = {
                 //     email: email,
                 //     password: password

@@ -9,7 +9,7 @@ const express = require('express');
 const router = express.Router();
 const xss = require('xss');
 const validator = require('validator');
-const passport = require('../../config/passport-user');
+// const passport = require('../../../config/passport-user');
 const services = require('../../assets/helpers/services');
 const userData = require('../../dao').user;
 
@@ -23,7 +23,7 @@ function isLoggedIn(req, res, next) {
 
 /* global scoped function */
 router.get('/', isLoggedIn, (req, res) => {
-    res.render('user/sign-up', {
+    res.render('user/signup', {
         mainTitle: "Create an Account •",
         mainDescription: "Welcome to the Free Lancer | A search engine to find a best job and workspace."
     });
@@ -64,22 +64,22 @@ router.post('/', async (req, res) => {
     }
 
     // searching for an existing user
-    try{
-        const userJsonDocument = await userData.getUserById(email);
-        if(userJsonDocument == null) {
+    // try{
+    //     const userJsonDocument = await userData.getUserById(email);
+    //     if(userJsonDocument == null) {
             const createUserDocument = await userData.createUser(username, email, password);
-        } else {
-            res.status(400).send({ error: "This email id is already registered." });
-        }
-    } catch(error) {
-        res.render('components/errors', {
-            mainTitle: "Server Error •",
-            code: 500,
-            message: error
-            // url: req.originalUrl,
-            // user: req.user
-        });
-    }
+        // } else {
+        //     res.status(400).send({ error: "This email id is already registered." });
+        // }
+    // } catch(error) {
+    //     res.render('components/errors', {
+    //         mainTitle: "Server Error •",
+    //         code: 500,
+    //         message: error
+    //         // url: req.originalUrl,
+    //         // user: req.user
+    //     });
+    // }
 });
 
 // exporting routing apis
