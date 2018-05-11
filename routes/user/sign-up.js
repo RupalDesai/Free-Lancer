@@ -60,15 +60,28 @@ router.post('/', async (req, res) => {
     if (!validator.isEmail(email)) {
         res.status(400).send({ message: "Invalid email id format." });
     }
+    
+    console.log(1);
+    
 
     console.log(3);
     
     // searching for an existing user
     try {
-        const createUserDocument = await userData.createUser(username, email, password);
+        const isUserExists = await userData.getUserById(email);
 
-    console.log(4);
-    
+        console.log(2);
+        console.log(isUserExists);
+        
+        
+        if (isUserExists !== null) {
+            const createUserDocument = await userData.createUser(username, email, password);
+            
+        console.log(3);
+        console.log(createUserDocument);
+        
+        }
+        //res.status(200).send({ message: "Account created successfully" });
     } catch(error) {
         res.status(400).send({ message: error });
     }
