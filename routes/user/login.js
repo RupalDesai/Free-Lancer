@@ -23,7 +23,7 @@ function isLoggedIn(req, res, next) {
 }
 
 async function isValid(req, res, next) {
-    let email = emailToLowerCase(xss(req.body.email));
+    let email = services.emailToLowerCase(xss(req.body.email));
     let password = xss(req.body.password);
 
     if (email.length == 0) {
@@ -52,24 +52,14 @@ async function isValid(req, res, next) {
 
 /* global scoped function */
 router.get('/', isLoggedIn, (req, res) => {
-    req.flash('loginFlash');
-        if (req.session.flash["error"] === undefined) {
-            res.render('user/login', { 
-                mainTitle: "Dashboard Login •",
-                url: '/user/dashboard',
-                error: req.session.flash.error 
-            });
-        } else {
-            res.render('user/login', { 
-                mainTitle: "Dashboard Login •",
-                error: req.session.flash.error.slice(-1)[0] 
-            });
-        }
+    res.render('user/login', { 
+        mainTitle: "Dashboard Login •"
+    });
 });
 
 router.post('/', isValid, async (req, res) => {
     let user = {    // create 'user' object
-    email: emailToLowerCase(xss(req.body.email)),
+    email: services.emailToLowerCase(xss(req.body.email)),
     password: xss(req.body.password)
 }
 
