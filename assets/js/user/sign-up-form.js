@@ -52,7 +52,7 @@ function submitSignUpForm(formData) {
 
             showAlert(true, "Account successfully created");
             setTimeout(() => {
-                window.location.href = '/user/dashboard'
+                window.location.href = '/user/profile'
             }, 600);
         },
         error: function(xhr, ajaxOptions, thrownError) {
