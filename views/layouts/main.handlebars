@@ -12,7 +12,28 @@
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/main/header.css">
     <link rel="stylesheet" href="/assets/css/main/main.css">
-    {{!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script> --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script> 
+         function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i<dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+  
 </head>
 <body>
     <!-- header starts from here -->
@@ -40,11 +61,29 @@
                                      <a href="/workspaces">Workspaces</a>
                                 </li>
                                 <li class="col-sm-3">
-                                     <a href="/user/sign-up">Account</a>
+                                    
+                                    {{!-- <div class="dropdown">
+                                        <a href="user/login" onclick="myFunction()" class="dropbtn">Account</p>
+                                            <div id="myDropdown" class="dropdown-content">
+                                              <a href="/user/profile">Profile</a>
+                                              <a href="#">Web History</a>
+                                              <a href="#">Job History</a>
+                                              <a href="#">Signout</a>
+                                    </div>
+                                </div> --}}
+                                     {{!-- <a href="/user/sign-up">Account</a> --}}
+                                     <div class="dropdown">
+                                      <button class="dropbtn">Account</button>
+                                        <div class="dropdown-content">
+                                                <a href="/user/profile">Profile</a>
+                                                <a href="#">Link 2</a>
+                                                <a href="#">Link 3</a>
+                                        </div>
+                                    </div>
                                 </li>
-                                <li class="col-sm-3">
+                                {{!-- <li class="col-sm-3">
                                      <a href="/user/profile">My Profile</a>
-                                </li>
+                                </li> --}}
                             </ul>
                         </div>
                     </div>
