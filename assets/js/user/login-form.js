@@ -44,7 +44,7 @@ function submitLoginForm(formData) {
         success: function(data) {
             showAlert(true, "User logged in successfully!");
             setTimeout(() => {
-                window.location.href = '/user/dashboard'
+                window.location.href = '/user/profile'
             }, 600);
         },
         error: function(xhr, ajaxOptions, thrownError) {

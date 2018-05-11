@@ -12,13 +12,12 @@ const user = mongoDbCollections.users;
 const credentials = mongoDbCollections.credentials;
 
 /* exporting controllers apis */
-module.exports = userControllers = {
+var userControllers = {
     /**
      * @returns {Object} An object of credentials
      */
     getCredentialByEmail: async function(email) {
         if (!email) throw "Please provide the email id";
-        
         const credentialCollection = await credentials();
         const credentialInfo = await credentialCollection.findOne({ _id: email });
         if (credentialInfo === null) {
@@ -50,19 +49,15 @@ module.exports = userControllers = {
      * @returns {Object} A success notex
      */
     compareCredentials: async (email, password) => {
-        const credentialInfo = await this.getCredentialByEmail(email);
-
-        console.log("R");
-        console.log(credentialInfo);
-        
-        if (!bcrypt.compareSync(password, credentialInfo.password)) {
-        console.log("I");
-        
-            throw "Incorrect password";
+        try {
+            const credentialInfo = await this.getCredentialByEmail(email);
+            if (!bcrypt.compareSync(password, credentialInfo.password)) {
+                throw "Incorrect password";
+            }      
+            return { success: true };
+        } catch(error) {
+            console.log(error);
         }
-        console.log("I");
-        
-        return { success: true };
     },
 
     //------------------------ generate new credential (for forget password)
@@ -82,3 +77,7 @@ module.exports = userControllers = {
         }        
     }
 };
+
+for(var key in userControllers) {
+    module.exports[key] = userControllers[key];
+}

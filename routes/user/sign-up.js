@@ -15,7 +15,7 @@ const userData = require('../../dao').users;
 
 function isLoggedIn(req, res, next) {
 	if (req.isAuthenticated()) {
-        res.redirect('/user/dashboard');
+        res.redirect('/user/profile');
     } else {
         return next();
     }
