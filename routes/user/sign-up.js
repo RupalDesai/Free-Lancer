@@ -11,7 +11,7 @@ const xss = require('xss');
 const validator = require('validator');
 const passport = require('../../config/passport-user');
 const services = require('../../assets/helpers/services');
-const userData = require('../../dao').user;
+const userData = require('../../dao').users;
 
 function isLoggedIn(req, res, next) {
 	if (req.isAuthenticated()) {
@@ -30,20 +30,11 @@ router.get('/', isLoggedIn, (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    console.log(1);
-    
-
     let newUser = req.body;
-    
-    console.log(1);
-    
 
     let username = xss(newUser.username);
     let email = services.emailToLowerCase(xss(newUser.email));
     let password = xss(newUser.password);
-
-    console.log(1);
-    console.log(newUser);
 
     // checking null values
     if(!username) {
@@ -54,34 +45,19 @@ router.post('/', async (req, res) => {
         res.status(400).send({ message: "Please provide your account password." });
     }
 
-    console.log(2);
-    
     // validating email syntax
     if (!validator.isEmail(email)) {
         res.status(400).send({ message: "Invalid email id format." });
     }
     
-    console.log(1);
-    
-
-    console.log(3);
-    
     // searching for an existing user
     try {
-        const isUserExists = await userData.getUserById(email);
-
-        console.log(2);
-        console.log(isUserExists);
-        
-        
-        if (isUserExists !== null) {
-            const createUserDocument = await userData.createUser(username, email, password);
-            
-        console.log(3);
-        console.log(createUserDocument);
-        
+        const isUserCreated = await userData.createUser(username, email, password);
+        if (isUserCreated.success === true) {
+            res.status(200).send({ message: "Account created successfully" });
+        } else {
+            res.status(400).send({ message: "Unknow error occurred" });
         }
-        //res.status(200).send({ message: "Account created successfully" });
     } catch(error) {
         res.status(400).send({ message: error });
     }

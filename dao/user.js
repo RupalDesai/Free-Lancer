@@ -57,9 +57,8 @@ module.exports = userControllers = {
                         id: email,
                         password: password
                     }
-                    passport.authenticate('user')(req, res, function() {
-                        res.json({ success: true });
-                    });
+                    passport.authenticate('user');
+                    return { success: true };
                 }
             } else {
                 throw "User is already registered.";
