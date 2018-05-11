@@ -12,27 +12,7 @@
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/main/header.css">
     <link rel="stylesheet" href="/assets/css/main/main.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-        <script>
-            function submitForm() {
-             var username = document.getElementById("username").value;
-                var emailid = document.getElementById("email_id").value;
-                var phone = document.getElementById("phone").value;
-                var pwd = document.getElementById("password").value;
-                var cpwd = document.getElementById("cpassword").value;
-                var aoi = document.getElementById("aoi").value;
-                  {{!-- alert(username); --}}
-                if (username.length > 0 && emailid.length > 0 && phone.length > 0 && pwd.length >0  && cpwd.length > 0 && aoi.length>0) {
-                    var form = document.getElementsByTagName("form");
-                    {{!-- alert(form[0]); --}}
-                    form[0].submit();
-
-                    
-                } else {
-                    alert("Please fill the form completely");
-                } 
-            }
-        </script>
+    {{!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script> --}}
 </head>
 <body>
     <!-- header starts from here -->

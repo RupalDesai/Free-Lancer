@@ -1,5 +1,3 @@
-import { type } from "os";
-
 //
 $(document).ready(function() {
     $("#signup-btn").on('click', function() {
@@ -47,7 +45,7 @@ $(document).ready(function() {
 function submitSignupForm(formData) {
     $.ajax({
         url: "/user/sign-up",
-        type: "post",
+        type: "POST",
         dataType: "json",
         data: JSON.stringify(formData),
         success: function(data) {
@@ -59,8 +57,8 @@ function submitSignupForm(formData) {
         },
         error: function(xhr, ajaxOptions, thrownError) {
             $("#alert").addClass("alert-error");
-            if(xhr.status === 400) { // receiving 404 status code
-                $("#error-login-message").html(xhr.message);
+            if(xhr.status === 400) {
+                $("#alert-msg").html(xhr.message);
             }
         },
         contentType: "application/json"
