@@ -51,9 +51,17 @@ module.exports = userControllers = {
      */
     compareCredentials: async (email, password) => {
         const credentialInfo = await this.getCredentialByEmail(email);
+
+        console.log("R");
+        console.log(credentialInfo);
+        
         if (!bcrypt.compareSync(password, credentialInfo.password)) {
+        console.log("I");
+        
             throw "Incorrect password";
         }
+        console.log("I");
+        
         return { success: true };
     },
 

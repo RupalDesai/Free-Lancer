@@ -18,7 +18,6 @@ module.exports = userControllers = {
      */
     getUserById: async function(email) {
         if (!email) throw "Please provide the email id";
-        
         const userCollection = await user();
         const userInfo = await userCollection.findOne({ _id: email });
         if (userInfo === null) {
