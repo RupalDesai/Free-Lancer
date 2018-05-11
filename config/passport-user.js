@@ -5,13 +5,8 @@ const LocalStrategy = require('passport-local').Strategy;
 const xss = require('xss');
 // data modules
 const dao = require('../dao');
-<<<<<<< HEAD
-const usersData = dao.user;
-// const credentialsData = dao.credentials;
-=======
 const usersData = dao.users;
 const credentialsData = dao.credentials;
->>>>>>> f95c84fc1c46907581e3299a1675fcd7f2897a56
 
 // passport configuration
 passport.use('user', new LocalStrategy({ usernameField:"email", passwordField:"password" }, (email, password, done) => {

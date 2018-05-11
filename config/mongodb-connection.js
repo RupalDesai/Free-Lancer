@@ -2,7 +2,7 @@ const MongoClient = require("mongodb").MongoClient;
 
 const settings = {
     mongoConfig: {
-        serverUrl: "mongodb://localhost:27017/",
+        serverUrl: "mongodb://155.246.139.65:27017/",
         database: "db-free-lancer"
     }
 };
