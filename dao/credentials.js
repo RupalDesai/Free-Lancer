@@ -14,13 +14,13 @@ const credentials = mongoDbCollections.credentials;
 /* exporting controllers apis */
 module.exports = userControllers = {
     /**
-     * @returns {Object} An object of workspace
+     * @returns {Object} An object of credentials
      */
     getCredentialByEmail: async function(email) {
         if (!email) throw "Please provide the email id";
         
         const credentialCollection = await credentials();
-        const credentialInfo = await credentialCollection.findOne({ email: email });
+        const credentialInfo = await credentialCollection.findOne({ _id: email });
         if (credentialInfo === null) {
             throw "Server issue in fetching user by email id";
         }
@@ -34,13 +34,13 @@ module.exports = userControllers = {
         if(!email || !password) throw "Insufficient data provided";
 
         let userCredential = {
-            email: email,
+            _id: email,
             password: bcrypt.hashSync(password, 16)
         }
 
         const credentialCollection = await credentials();
-        const isCredentialCreated = await credentialCollection.insert({ userCredential });
-        if (isCredentialCreated.length === 0) {
+        const isCredentialCreated = await credentialCollection.insert(userCredential);
+        if (isCredentialCreated.insertedCount === 0) {
             throw "Server issue while creating user.";
         }
         return { success: true };
@@ -55,5 +55,22 @@ module.exports = userControllers = {
             throw "Incorrect password";
         }
         return { success: true };
+    },
+
+    //------------------------ generate new credential (for forget password)
+    generateCredential: async (email) => {
+        const credentialCollection = await credentials();
+        let genPassword = randomString.generate(8);     // generating random string
+        
+        // update new credential object (empty)
+        let credentialChanges = { };
+        credentialChanges['password'] = generateHashedPassword(genPassword);
+        try {
+            // updating credential information into the collection
+            credentialsCollection.updateOne( { _id:email }, { $set:credentialChanges });
+            return genPassword; 
+        } catch (error) {
+            throw "Server issue with 'credentials' collection.";
+        }        
     }
 };

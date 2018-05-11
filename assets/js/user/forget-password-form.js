@@ -1,22 +1,19 @@
 /**
  * Validates the form fields
  */
-function validateLoginForm() {
+function validateForgetPasswordForm() {
     const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const email = document.getElementsByName("email")[0].value;
-    const password = document.getElementsByName("password")[0].value;
-    
+        
     // Validation
     var isFormValid = false;
     if (email.length < 0) showAlert(false, "Please provide an email id.");
     else if (!regex.test(email)) showAlert(false, "Invalid email address!");
-    else if (password.length < 1 || password.length > 8) showAlert(false, "Please provide a password!");
     else {
         const formData = {
-            email: email,
-            password: password
+            email: email
         };
-        submitLoginForm(formData);
+        submitForgetPasswordForm(formData);
     }
 }
 
@@ -36,18 +33,13 @@ function showAlert(isSuccess, message) {
  * Submits the form
  * @param {Object} formData Data to be passed in the database
  */
-function submitLoginForm(formData) {
+function submitForgetPasswordForm(formData) {
     $.ajax({
-        url: "/user/login",
+        url: "/user/forget-password",
         type: "POST",
         data: JSON.stringify(formData),
         success: function(data) {
-            console.log(data)
-
-            showAlert(true, "User logged in successfully!");
-            setTimeout(() => {
-                window.location.href = '/user/dashboard'
-            }, 600);
+            showAlert(true, "New password for '" + data.email + "' is " + data.password);
         },
         error: function(xhr, ajaxOptions, thrownError) {
             if(xhr.status === 400) { // receiving 404 status code

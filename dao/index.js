@@ -3,5 +3,5 @@ module.exports = {
     companies: require('./companies'),
     workspaces: require('./workspaces'),
     workspacesReviews: require('./workspaces-reviews'),
-    user: require('./user')
+    users: require('./user')
 };
