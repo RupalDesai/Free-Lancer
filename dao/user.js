@@ -39,7 +39,6 @@ let userControllers = {
             username: username,
             name: '',
             mobile: '',
-            image: '',
             areaOfInterest: ''
         };
         
