@@ -24,21 +24,17 @@ function isLoggedIn(req, res, next) {
 
 async function isValid(req, res, next) {
     let email = emailToLowerCase(xss(req.body.email));
-    let password = xss(req.body.password);
-
+    
     if (email.length == 0) {
         res.status(400).send({ error: "No email id provided" });
-    } else if (password.length == 0) {
-        res.status(400).send({ error : "No password provided" });
-    }
-
+    } 
     if (!validator.isEmail(email)) {
-        res.status(404).send({ error: "Invalid email id format." });
+        res.status(400).send({ error: "Invalid email id format." });
     }
 
     const userCredentials = await credentialData.getCredentialByEmail(email);
     if (userCredentials == null) {      // no user document found
-        res.status(404).send({ error: "This email id is not registered" });
+        res.status(400).send({ error: "This email id is not registered" });
     } else {    // document found and comparing credentials
         try{
             credentialsData.compareCredential(email, password);
@@ -63,12 +59,9 @@ router.post('/', isValid, async (req, res) => {
     let email = services.emailToLowerCase(xss(req.body.email));
     
     // generating new random password
-
-
-    credentialsData.generateCredential(email).then((genPass) => {
-        req.body["password"] = genPass;
-        res.json(req.body);
-	});
+    const genPass = await credentials.generateCredential(email);
+    req.body["password"] = genPass;
+    res.json(req.body);
 });
 
 // exporting routing apis

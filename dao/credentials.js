@@ -14,7 +14,7 @@ const credentials = mongoDbCollections.credentials;
 /* exporting controllers apis */
 module.exports = userControllers = {
     /**
-     * @returns {Object} An object of workspace
+     * @returns {Object} An object of credentials
      */
     getCredentialByEmail: async function(email) {
         if (!email) throw "Please provide the email id";
@@ -55,5 +55,22 @@ module.exports = userControllers = {
             throw "Incorrect password";
         }
         return { success: true };
+    },
+
+    //------------------------ generate new credential (for forget password)
+    generateCredential: async (email) => {
+        const credentialCollection = await credentials();
+        let genPassword = randomString.generate(8);     // generating random string
+        
+        // update new credential object (empty)
+        let credentialChanges = { };
+        credentialChanges['password'] = generateHashedPassword(genPassword);
+        try {
+            // updating credential information into the collection
+            credentialsCollection.updateOne( { _id:email }, { $set:credentialChanges });
+            return genPassword; 
+        } catch (error) {
+            throw "Server issue with 'credentials' collection.";
+        }        
     }
 };
