@@ -20,5 +20,6 @@ module.exports = {
     workspaces: getCollectionFn("workspaces"),
     workspaceReviews: getCollectionFn("workspaceReviews"),
     users: getCollectionFn("users"),
+    workspaceHistory: getCollectionFn("workspaceHistory")
   
 };

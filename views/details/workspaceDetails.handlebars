@@ -1,0 +1,24 @@
+
+
+<article>
+    <h2>Welcome!</h2>
+    {{#each workspace}}
+    <label>Name</label> : {{name}} <br/>
+        <label>Email</label> : {{email}}<br/>
+        <label>Phone</label> : {{phone}}<br/>
+        <label>Address</label> : {{address}}<br/>
+        <label>Type</label> : {{type}}<br/>
+        <label>Opens at</label> : {{opensAt}}<br/>
+        <label>Closes at</label> : {{closesAt}}<br/>
+        <label>Rating</label> : {{rating}}<br/>
+    {{/each}}
+    <h3>Reviwes</h3>
+    {{#each reviews}}
+    <label>Name of Reviewer</label> : {{name}}<br/>
+    <label>comments</label> : {{comment}}<br/>
+    <label>Rating</label> : {{rating}}<br/>
+    {{/each}}
+
+    <a href="/Book" class="btn btn-default">Book This Place</a>
+    
+</article>

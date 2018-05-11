@@ -13,38 +13,39 @@ const services = require('../../assets/helpers/services');
 // const services = require('../../assets/helpers/services');
 
 router.get('/', async  (req, res) => {
-
-        res.render('user/profile');
+    var email = 'pgarg2@stevens.edu';
+    try {
+        const userInfo = await userData.getUserById(email);
+        res.render('user/profile', {
+            user: userInfo
+        });
+    } catch(err) {
+        throw err;
+    }
 });
+
 router.post('/', async (req, res) => {
-    // console.log("inside router post");
     let input = req.body;
 
+    let email = 'pgarg2@stevens.edu';
     let name = xss(input.name);
-    let email = services.emailToLowerCase(xss(input.email));
+    // let email = xss(input.email);
     let mobile = xss(input.mobile);
-    let interest=xss(input.areaofinterest);
-    console.log("inside router post");
+    let interest = xss(input.areaofinterest);
 
     // checking null values
-    if(!name) {
-        res.status(400).send({ message: "Please provide your username." });
-    } else if (!email) {
-        res.status(400).send({ message: "Please provide your email id." });
-    } else if (!mobile) {
-        res.status(400).send({ message: "Please provide your account password." });
-    }else if(!interest){
-        res.status(400).send({message:"Please provide your area of interest"});
-    }
-        console.log("1");
-
+    if(!name && typeof name === 'string') res.status(400).send({ message: "Please provide your username." });
+   // else if(!email) res.status(400).send({ message: "Please provide your email." });
+    else if (!mobile && mobile.length!= 10 && typeof mobile === 'string') res.status(400).send({ message: "Please provide your account mobile." });
+    else if(!interest && typeof interest === 'string') res.status(400).send({message:"Please provide your area of interest"});
+    
     try {
-            console.log("2");
-
         const isUserEdited = await userData.editUserInfo(name, email, mobile, interest);
         if (isUserEdited.success === true) {
-            console.log("5");
-            res.status(200).send({ message: "Account created successfully" });
+            const userInfo = await userData.getUserById(email);
+            res.render('user/profile', {
+                user: userInfo
+            });
         } else {
             res.status(400).send({ message: "Unknow error occurred" });
         }
