@@ -11,7 +11,8 @@ const xss = require('xss');
 const validator = require('validator');
 const passport = require('../../config/passport-user');
 const services = require('../../assets/helpers/services');
-const userData = require('../../dao').user;
+const users = require('../../dao').user;
+const credentials = require('../../dao').credentials;
 
 function isLoggedIn(req, res, next) {
 	if (req.isAuthenticated()) {
@@ -21,6 +22,31 @@ function isLoggedIn(req, res, next) {
     }
 }
 
+async function isValid(req, res, next) {
+    let email = emailToLowerCase(xss(req.body.email));
+    
+    if (email.length == 0) {
+        res.status(400).send({ error: "No email id provided" });
+    } 
+    if (!validator.isEmail(email)) {
+        res.status(400).send({ error: "Invalid email id format." });
+    }
+
+    const userCredentials = await credentialData.getCredentialByEmail(email);
+    if (userCredentials == null) {      // no user document found
+        res.status(400).send({ error: "This email id is not registered" });
+    } else {    // document found and comparing credentials
+        try{
+            credentialsData.compareCredential(email, password);
+            next();
+        } catch (error) {
+            res.status(400).send({ error: "Incorrect password!" });
+        }
+    }
+}
+
+
+
 /* global scoped function */
 router.get('/', isLoggedIn, (req, res) => {
     res.render('user/forget-password', {
@@ -29,57 +55,13 @@ router.get('/', isLoggedIn, (req, res) => {
     });
 });
 
-router.post('/', async (req, res) => {
-    let newUser = req.body;
+router.post('/', isValid, async (req, res) => {
+    let email = services.emailToLowerCase(xss(req.body.email));
     
-    let username = xss(newUser.username);
-    let email = services.emailToLowerCase(xss(newUser.email));
-    let password = xss(newUser.password);
-
-    // checking null values
-    if(!username) {
-        res.render('user/forget-password', { 
-            mainTitle: "Create an Account •",
-            error: "Please provide your username." 
-        });
-        return;
-    } else if (!email) {
-        res.render('user/forget-password', {
-            mainTitle: "Create an Account •",
-            error: "Please provide your email id."
-        });
-        return;
-    } else if (!password) {
-        res.render('user/login', {
-            mainTitle: "Create an Account •",
-            error: "Please provide your account password." 
-        });
-        return;
-    }
-
-    // validating email syntax
-    if (!validator.isEmail(email)) {
-        res.status(404).send({ error: "Invalid email id format." });
-        return;
-    }
-
-    // searching for an existing user
-    try{
-        const userJsonDocument = await userData.getUserById(email);
-        if(userJsonDocument == null) {
-            const createUserDocument = await userData.createUser(username, email, password);
-        } else {
-            res.status(400).send({ error: "This email id is already registered." });
-        }
-    } catch(error) {
-        res.render('components/errors', {
-            mainTitle: "Server Error •",
-            code: 500,
-            message: error
-            // url: req.originalUrl,
-            // user: req.user
-        });
-    }
+    // generating new random password
+    const genPass = await credentials.generateCredential(email);
+    req.body["password"] = genPass;
+    res.json(req.body);
 });
 
 // exporting routing apis
