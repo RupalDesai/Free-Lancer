@@ -5,7 +5,7 @@ const userData = require('../../dao').user;
 
 router.get('/', async  (req, res) => {
     res.render('user/profile', {
-        title: "Edit your profile•"
+        mainTitle: "Edit your profile•"
         
     });
 });

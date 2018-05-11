@@ -14,6 +14,9 @@ const services = require('../../assets/helpers/services');
 const userData = require('../../dao').users;
 
 function isLoggedIn(req, res, next) {
+    // let input=req.body;
+    // let Userid=input["id"];
+    // console.log(input);
 	if (req.isAuthenticated()) {
         res.redirect('/user/dashboard');
     } else {
