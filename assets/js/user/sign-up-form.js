@@ -1,65 +1,66 @@
-$(document).ready(function() {
-    $("#signup-btn").on('click', function() {
-        const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        const form = $("#signup-form");
-        const username = $("#username").val();
-        const email = $("#email").val();
-        const password = $("#password").val();
-        const cPassword = $("#confirm-password").val();
+/**
+ * Validates the form fields
+ */
+function validateSignUpForm() {
+    const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const username = document.getElementsByName("username")[0].value;
+    const email = document.getElementsByName("email")[0].value;
+    const password = document.getElementsByName("password")[0].value;
+    const cPassword = document.getElementsByName("confirm-password")[0].value;
 
-        var message = "";
-        if (username.length > 0 && username.length <= 10) {
-            if (email.length > 0) {
-                if (regex.test(email)) {
-                    if (password.length > 0 && password.length == 8) {
-                        if (cPassword.length > 0) {
-                            if (password === cPassword) {
-                                const formData = {
-                                    username: username,
-                                    email: email,
-                                    password: password
-                                }
-                                submitSignupForm(formData);
-                            } else {
-                                message = "Passwords does not match!";
-                            }    
-                        } else {
-                            message = "Please retype the password in confirm password field!";
-                        }
-                    } else {
-                        message = "Please provide a valid password!";
-                    }
-                } else {
-                    message = "Invalid email address!";
-                }
-            } else {
-                message = "Please provide an email id!";
-            }
-        } else {
-            message = "Invalid username! Username could have maximum 10 letters.";
-        }
-    });
-});
+    // Validation
+    var isFormValid = false;
+    if (username.length < 1 || username.length > 10) showAlert(false, "Invalid username! Username could have maximum 10 letters.!");
+    else if (email.length < 0) showAlert(false, "Please provide an email id.");
+    else if (!regex.test(email)) showAlert(false, "Invalid email address!");
+    else if (password.length < 1 || password.length > 8) showAlert(false, "Please provide a password!");
+    else if (cPassword.length < 1 || cPassword.length > 8) showAlert(false, "Please provide a confirmation password!");
+    else if (password !== cPassword) showAlert(false, "Passwords does not match.");
+    else {
+        const formData = {
+            username: username,
+            email: email,
+            password: password
+        };
+        submitSignUpForm(formData);
+    }
+}
 
-function submitSignupForm(formData) {
+/**
+ * Shows alert
+ * @param {Boolean} isSuccess Success flag
+ * @param {String} message An alert message
+ */
+function showAlert(isSuccess, message) {
+    const alertBox = document.getElementById("alert");
+    const alertClass = (isSuccess) ? "alert-success" : "alert-danger";
+    alertBox.classList.add(alertClass);
+    alertBox.textContent = message;
+}
+
+/**
+ * Submits the form
+ * @param {Object} formData Data to be passed in the database
+ */
+function submitSignUpForm(formData) {
     $.ajax({
         url: "/user/sign-up",
-        type: "post",
-        dataType: "json",
+        type: "POST",
         data: JSON.stringify(formData),
         success: function(data) {
-            $("#alert").addClass("alert-success");
-            $("#alert-msg").html("Account successfully created");
+            console.log(data)
+
+            showAlert(true, "Account successfully created");
             setTimeout(() => {
                 window.location.href = '/user/dashboard'
             }, 600);
         },
         error: function(xhr, ajaxOptions, thrownError) {
-            $("#alert").addClass("alert-error");
             if(xhr.status === 400) { // receiving 404 status code
-                $("#error-login-message").html(xhr.message);
+                showAlert(false, thrownError);
             }
         },
+        dataType: "json",
         contentType: "application/json"
     });
 }

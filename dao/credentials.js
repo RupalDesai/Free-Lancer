@@ -20,7 +20,7 @@ module.exports = userControllers = {
         if (!email) throw "Please provide the email id";
         
         const credentialCollection = await credentials();
-        const credentialInfo = await credentialCollection.findOne({ email: email });
+        const credentialInfo = await credentialCollection.findOne({ _id: email });
         if (credentialInfo === null) {
             throw "Server issue in fetching user by email id";
         }
@@ -34,13 +34,13 @@ module.exports = userControllers = {
         if(!email || !password) throw "Insufficient data provided";
 
         let userCredential = {
-            email: email,
+            _id: email,
             password: bcrypt.hashSync(password, 16)
         }
 
         const credentialCollection = await credentials();
-        const isCredentialCreated = await credentialCollection.insert({ userCredential });
-        if (isCredentialCreated.length === 0) {
+        const isCredentialCreated = await credentialCollection.insert(userCredential);
+        if (isCredentialCreated.insertedCount === 0) {
             throw "Server issue while creating user.";
         }
         return { success: true };

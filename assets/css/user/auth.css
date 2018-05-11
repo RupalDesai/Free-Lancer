@@ -10,3 +10,6 @@
 #sign-up .btn-primary, #login .btn-primary, #forget-password .btn-primary {
     background-color: #116466;
 }
+#alert {
+    margin-top: 1em;
+}
