@@ -11,33 +11,29 @@ router.get('/:id', async (req, res) => {
     var projectDetails = [];
     var companyClicked = '';
     const companyList = await companies.getCompanies();
-    console.log("now you clicked on job details \n");
+    //console.log("now you clicked on job details \n");
     //console.log(companyList);
-    console.log("job id is "+jobID);
+    //console.log("clicked job id is "+jobID);
 
-    
-
-    /*for(let x in companyList){
-        //console.log(" project is"+ companyList[x]["projects"]);
-        //projectList += companyList[x]["projects"];
-    for(let y in companyList[x]["projects"]) {
-        console.log("id is ",projects[y][_id]);
-        /*if(jobID == companyList[y]["projects"]){
-
-            console.log("Fetched data --> ", jobID);
-            // projectDetails = projectList[y];
-            
+    for(let x in companyList){
+        for (let y in companyList[x]["projects"]){
+            //console.log(" project is"+ companyList[x]["projects"]);
+            projectList.push(companyList[x]["projects"][y])
         }
-    }
-    }*/
-    
-    //companyClicked = companyList[x]["name"];
-    console.log("projectList is ",projectList);
-    console.log("projectDetails is ",projectDetails);
-    console.log("company name is ",companyClicked);
         
-      res.render("details/jobDetails", { 
-        Company : companyClicked,
+    }
+    
+    for(let x in projectList) {
+        if (jobID === projectList[x]['_id']){
+            projectDetails.push(projectList[x])
+        }
+        
+    }
+    
+    //console.log("clicked project Details is ",projectDetails);
+    
+    res.render("details/jobDetails", { 
+        //Company : companyClicked,
         Project : projectDetails
         
         });

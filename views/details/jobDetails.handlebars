@@ -2,7 +2,8 @@
 
 <article>
     <h2>Welcome!</h2>
-    <label>Company Name</label> : {{Company}} <br/>
+    {{#each Project}}
+    {{!-- <label>Company Name</label> : {{Company}} <br/> --}}
         <label>Project Name</label> : {{title}}<br/>
         <label>Description</label> : {{desc}}<br/>
         <label>Position</label> : {{position}}<br/>
@@ -10,7 +11,7 @@
         <label>StartDate</label> : {{startDate}}<br/>
         <label>End Date</label> : {{endDate}}<br/>
         <label>Hours</label> : {{hours}}<br/>
-
+    {{/each}}
     <a href="/Apply" class="btn btn-default">Apply</a>
     
 </article>

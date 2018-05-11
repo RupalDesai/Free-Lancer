@@ -21,7 +21,6 @@ function isLoggedIn(req, res, next) {
         return next();
     }
 }
-}
 
 async function isValid(req, res, next) {
     let email = xss(services.emailToLowerCase(req.body.email));

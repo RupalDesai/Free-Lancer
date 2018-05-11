@@ -11,9 +11,9 @@ router.get('/:id', async (req, res) => {
     var projectList = [];
     var companyClicked = '';
     const companyList = await companies.getCompanies();
-    console.log("now you clicked on company name \n");
-    console.log(companyList);
-    console.log("id is "+CompID);
+    //console.log("now you clicked on company name \n");
+    // console.log(companyList);
+    // console.log("id is "+CompID);
     for(let x in companyList){
         // for(let y in companyList[x]) {
             if(CompID == companyList[x]["_id"]){
@@ -23,8 +23,8 @@ router.get('/:id', async (req, res) => {
             }
         // }
     }
-    console.log("projectList is ",projectList);
-    console.log("company name is ",companyClicked);
+    //console.log("projectList is ",projectList);
+    //console.log("company name is ",companyClicked);
         
       res.render("details/companyDetails", { 
         Company : companyClicked,
