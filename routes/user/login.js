@@ -15,17 +15,11 @@ const userData = require('../../dao').users;
 const credentialData = require('../../dao').credentials;
 
 function isLoggedIn(req, res, next) {
-<<<<<<< HEAD
-	// if (req.isAuthenticated()) {
-    //     res.redirect('/user/dashboard');
-    // } else {
-=======
 	if (req.isAuthenticated()) {
         res.redirect('/user/profile');
     } else {
->>>>>>> 002876d100b70e4d0c9f56ca54d81d8ea2958147
         return next();
-    // }
+    }
 }
 
 async function isValid(req, res, next) {
@@ -57,29 +51,9 @@ async function isValid(req, res, next) {
 
 /* global scoped function */
 router.get('/', isLoggedIn, (req, res) => {
-<<<<<<< HEAD
-    // req.flash('loginFlash');
-    // if (req.session.flash["error"] === undefined) {
-    //     res.render('user/login', { 
-    //         mainTitle: "Dashboard Login •",
-    //         url: '/user/dashboard',
-    //         error: req.session.flash.error 
-    //     });
-    // } else {
-    // res.render('user/login', { 
-    //     mainTitle: "Dashboard Login •",
-    //     //error: req.session.flash.error.slice(-1)[0] 
-    // });
-    // }
-    
-    res.render('user/profile');
-
-    
-=======
     res.render('user/login', { 
         mainTitle: "Dashboard Login •",
     });
->>>>>>> 002876d100b70e4d0c9f56ca54d81d8ea2958147
 });
 
 router.post('/', isValid, async (req, res) => {

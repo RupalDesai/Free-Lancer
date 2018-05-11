@@ -18,15 +18,12 @@ module.exports = userControllers = {
      */
     getUserById: async function(email) {
         if (!email) throw "Please provide the email id";
-        console.log("inside getUserById 1");
         const userCollection = await user();
-        console.log("inside getUserById 2");
         const userInfo = await userCollection.findOne({ _id: email });
         if (userInfo === null) {
             console.log("inside getUserById throw");
             throw "Server issue in fetching user by email id";
         }
-        console.log("returning");
         return userInfo;
     },
 
