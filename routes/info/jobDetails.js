@@ -15,26 +15,26 @@ router.get('/:id', async (req, res) => {
     //console.log(companyList);
     console.log("job id is "+jobID);
 
-    
+    console.log("companyList --> ", companyList);
 
-    /*for(let x in companyList){
-        //console.log(" project is"+ companyList[x]["projects"]);
-        //projectList += companyList[x]["projects"];
-    for(let y in companyList[x]["projects"]) {
-        console.log("id is ",projects[y][_id]);
-        /*if(jobID == companyList[y]["projects"]){
+    for(let x in companyList){
+        console.log(" project is"+ companyList[x]);
+        // projectList += companyList[x]["projects"];
+        // for(let y in companyList[x]) {
+        //     console.log("id is ",projects[y][_id]);
+        //     if(jobID == companyList[y]["projects"]){
 
-            console.log("Fetched data --> ", jobID);
-            // projectDetails = projectList[y];
-            
-        }
+        //         console.log("Fetched data --> ", jobID);
+        //         projectDetails = projectList[y];
+                
+        //     }
+        // }
     }
-    }*/
     
-    //companyClicked = companyList[x]["name"];
-    console.log("projectList is ",projectList);
-    console.log("projectDetails is ",projectDetails);
-    console.log("company name is ",companyClicked);
+    // //companyClicked = companyList[x]["name"];
+    // console.log("projectList is ",projectList);
+    // console.log("projectDetails is ",projectDetails);
+    // console.log("company name is ",companyClicked);
         
       res.render("details/jobDetails", { 
         Company : companyClicked,
