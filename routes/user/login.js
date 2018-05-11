@@ -15,11 +15,11 @@ const userData = require('../../dao').users;
 const credentialData = require('../../dao').credentials;
 
 function isLoggedIn(req, res, next) {
-	if (req.isAuthenticated()) {
-        res.redirect('/user/dashboard');
-    } else {
+	// if (req.isAuthenticated()) {
+    //     res.redirect('/user/dashboard');
+    // } else {
         return next();
-    }
+    // }
 }
 
 async function isValid(req, res, next) {
@@ -65,11 +65,15 @@ router.get('/', isLoggedIn, (req, res) => {
     //         error: req.session.flash.error 
     //     });
     // } else {
-    res.render('user/login', { 
-        mainTitle: "Dashboard Login •",
-        //error: req.session.flash.error.slice(-1)[0] 
-    });
+    // res.render('user/login', { 
+    //     mainTitle: "Dashboard Login •",
+    //     //error: req.session.flash.error.slice(-1)[0] 
+    // });
     // }
+    
+    res.render('user/profile');
+
+    
 });
 
 router.post('/', isValid, async (req, res) => {

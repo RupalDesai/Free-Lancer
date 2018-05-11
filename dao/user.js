@@ -18,11 +18,15 @@ module.exports = userControllers = {
      */
     getUserById: async function(email) {
         if (!email) throw "Please provide the email id";
+        console.log("inside getUserById 1");
         const userCollection = await user();
+        console.log("inside getUserById 2");
         const userInfo = await userCollection.findOne({ _id: email });
         if (userInfo === null) {
+            console.log("inside getUserById throw");
             throw "Server issue in fetching user by email id";
         }
+        console.log("returning");
         return userInfo;
     },
 
@@ -42,6 +46,8 @@ module.exports = userControllers = {
             image: '',
             areaOfInterest: ''
         };
+        
+
         try {
             const userCollection = await user();
             const isUserExists = await userCollection.findOne({ _id: email });
@@ -50,7 +56,7 @@ module.exports = userControllers = {
                 const isUserCreated = await userCollection.insert(userInfo);
     
                 if (isUserCreated.insertedCount === 0) throw "Server issue while creating user.";
-                else {
+                else{
                     const isCredentialCreated = await credential.createCredential(email, password);
                     let user = {
                         id: email,
@@ -58,12 +64,32 @@ module.exports = userControllers = {
                     }
                     passport.authenticate('user');
                     return { success: true };
-                }
+                } 
+
             } else {
                 throw "User is already registered.";
             }
         } catch (error) {
             throw error; 
         }
+    },
+
+    editUserInfo: async function(name, email, mobile, areaofinterest) {
+        console.log("3")
+        if(!name || !email || !mobile ||!areaofinterest) throw "Insufficient data provided";
+        const user1Collection = await user();
+        let userInfo = user1Collection.getUserById(email);
+        console.log(userInfo);
+        console.log("4");
+        if(userInfo) {
+            userInfo["name"] = name;
+            userInfo["mobile"] = mobile;
+            userInfo["areaOfInterest"] = areaofinterest;
+        }
+        console.log(userInfo);
+        
+
+         
+        // alert(userInfo)
     }
 };

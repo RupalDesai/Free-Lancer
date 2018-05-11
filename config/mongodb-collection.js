@@ -19,5 +19,6 @@ module.exports = {
     companies: getCollectionFn("companies"),
     workspaces: getCollectionFn("workspaces"),
     workspaceReviews: getCollectionFn("workspaceReviews"),
-    users: getCollectionFn("users")
+    users: getCollectionFn("users"),
+  
 };

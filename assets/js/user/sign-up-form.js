@@ -7,7 +7,7 @@ function validateSignUpForm() {
     const email = document.getElementsByName("email")[0].value;
     const password = document.getElementsByName("password")[0].value;
     const cPassword = document.getElementsByName("confirm-password")[0].value;
-
+    
     // Validation
     var isFormValid = false;
     if (username.length < 1 || username.length > 10) showAlert(false, "Invalid username! Username could have maximum 10 letters.!");
@@ -52,7 +52,7 @@ function submitSignUpForm(formData) {
 
             showAlert(true, "Account successfully created");
             setTimeout(() => {
-                window.location.href = '/user/dashboard'
+                window.location.href = 'http://localhost:3000'
             }, 600);
         },
         error: function(xhr, ajaxOptions, thrownError) {
