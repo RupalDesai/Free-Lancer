@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 
     const companyList = await companies.getCompanies();
     console.log("now you clicked on jobs \n");
-    console.log(companyList);
+    //console.log(companyList);
     
       res.render("static/job", { 
         title: "Job Page!!",

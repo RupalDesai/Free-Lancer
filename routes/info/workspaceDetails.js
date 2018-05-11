@@ -31,19 +31,9 @@ router.get('/:id', async (req, res) => {
         }
     })
 
-    
-
-    // for(let x in workspaceList){
-    //     // for(let y in companyList[x]) {
-    //         if(workSpaceID == workspaceList[x]["_id"]){
-    //             //console.log("Fetched data --> ", companyList[x]["projects"]);
-    //             WorkspaceDetails = workspaceList[x];
-    //         }
-    //     // }
-    // }
-    console.log("workspace details is ", WorkspaceDetails);
-    console.log("reviews id is ", ReviewID);
-    console.log("reviews are ", ReviewDetails);
+    //console.log("workspace details is ", WorkspaceDetails);
+    //console.log("reviews id is ", ReviewID);
+    //console.log("reviews are ", ReviewDetails);
     res.render("details/workspaceDetails", { 
         workspace:  WorkspaceDetails,
         reviews : ReviewDetails
