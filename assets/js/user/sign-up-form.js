@@ -1,3 +1,4 @@
+import { type } from "os";
 
 //
 $(document).ready(function() {
