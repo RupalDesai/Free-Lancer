@@ -11,7 +11,6 @@ const mainRoutes = (app) => {
     /* customized routes */
     app.use("/info", infoRoutes);
     app.use("/user", userRoutes);
-
     /* non existing page configuration */
     app.use("*", (req, res) => {
         res.render('components/errors', {
