@@ -1,7 +1,7 @@
 /* 
  * User Routers * 
  * User Data Access Object *
- * User Signup *
+ * User Login *
 */
 
 /* importing required files and packages */
@@ -11,7 +11,7 @@ const xss = require('xss');
 const validator = require('validator');
 const passport = require('../../config/passport-user');
 const services = require('../../assets/helpers/services');
-const userData = require('../../dao').user;
+const userData = require('../../dao').users;
 const credentialData = require('../../dao').credentials;
 
 function isLoggedIn(req, res, next) {
@@ -23,59 +23,68 @@ function isLoggedIn(req, res, next) {
 }
 
 async function isValid(req, res, next) {
-    let email = emailToLowerCase(xss(req.body.email));
+
+    let email = xss(services.emailToLowerCase(req.body.email));
     let password = xss(req.body.password);
 
     if (email.length == 0) {
-        res.status(400).send({ error: "No email id provided" });
+        res.status(400).send({ message: "No email id provided" });
     } else if (password.length == 0) {
-        res.status(400).send({ error : "No password provided" });
+        res.status(400).send({ message : "No password provided" });
     }
 
     if (!validator.isEmail(email)) {
-        res.status(404).send({ error: "Invalid email id format." });
+        res.status(404).send({ message: "Invalid email id format." });
     }
 
     const userCredentials = await credentialData.getCredentialByEmail(email);
-    if (userCredentials == null) {      // no user document found
-        res.status(404).send({ error: "This email id is not registered" });
-    } else {    // document found and comparing credentials
+    if (userCredentials === null) { // no user document found
+        res.status(404).send({ message: "This email id is not registered" });
+    } else { // document found and comparing credentials
         try{
-            credentialsData.compareCredential(email, password);
-            next();
+            const isValidUser = await credentialData.compareCredentials(email, password);
+    console.log("aa8");
+    
+            if (isValidUser.success === true) next();
+            else res.status(400).send({ message: "Incorrect password!" });
+    console.log("aa9");
+    
         } catch (error) {
-            res.status(400).send({ error: "Incorrect password!" });
+            res.status(400).send({ message: error });
         }
     }
 }
 
-
 /* global scoped function */
 router.get('/', isLoggedIn, (req, res) => {
-    req.flash('loginFlash');
-        if (req.session.flash["error"] === undefined) {
-            res.render('user/login', { 
-                mainTitle: "Dashboard Login •",
-                url: '/user/dashboard',
-                error: req.session.flash.error 
-            });
-        } else {
-            res.render('user/login', { 
-                mainTitle: "Dashboard Login •",
-                error: req.session.flash.error.slice(-1)[0] 
-            });
-        }
+    // req.flash('loginFlash');
+    // if (req.session.flash["error"] === undefined) {
+    //     res.render('user/login', { 
+    //         mainTitle: "Dashboard Login •",
+    //         url: '/user/dashboard',
+    //         error: req.session.flash.error 
+    //     });
+    // } else {
+    res.render('user/login', { 
+        mainTitle: "Dashboard Login •",
+        //error: req.session.flash.error.slice(-1)[0] 
+    });
+    // }
 });
 
 router.post('/', isValid, async (req, res) => {
-    let user = {    // create 'user' object
-    email: emailToLowerCase(xss(req.body.email)),
-    password: xss(req.body.password)
-}
 
-passport.authenticate('user')(req, res, async function () {   //authenticate user
-    res.json({ success: true, url: req.url });
-});
+    console.log('a');
+
+    const user = await userData.getUserById(services.emailToLowerCase(xss(req.body.email)));
+
+    console.log('b');
+    
+    passport.authenticate('user');
+
+    console.log('c');
+    
+    res.status(200).send({ message: "User logged in successfully!" });
 });
 
 // exporting routing apis

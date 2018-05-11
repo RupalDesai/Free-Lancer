@@ -42,8 +42,6 @@ function submitLoginForm(formData) {
         type: "POST",
         data: JSON.stringify(formData),
         success: function(data) {
-            console.log(data)
-
             showAlert(true, "User logged in successfully!");
             setTimeout(() => {
                 window.location.href = '/user/dashboard'
@@ -51,7 +49,7 @@ function submitLoginForm(formData) {
         },
         error: function(xhr, ajaxOptions, thrownError) {
             if(xhr.status === 400) { // receiving 404 status code
-                showAlert(false, thrownError);
+                showAlert(false, thrownError.message);
             }
         },
         dataType: "json",
