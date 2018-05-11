@@ -29,13 +29,15 @@ router.post('/', async (req, res) => {
 
     let email = 'pgarg2@stevens.edu';
     let name = xss(input.name);
+    // let email = xss(input.email);
     let mobile = xss(input.mobile);
     let interest = xss(input.areaofinterest);
 
     // checking null values
-    if(!name) res.status(400).send({ message: "Please provide your username." });
-    else if (!mobile) res.status(400).send({ message: "Please provide your account password." });
-    else if(!interest) res.status(400).send({message:"Please provide your area of interest"});
+    if(!name && typeof name === 'string') res.status(400).send({ message: "Please provide your username." });
+   // else if(!email) res.status(400).send({ message: "Please provide your email." });
+    else if (!mobile && mobile.length!= 10 && typeof mobile === 'string') res.status(400).send({ message: "Please provide your account mobile." });
+    else if(!interest && typeof interest === 'string') res.status(400).send({message:"Please provide your area of interest"});
     
     try {
         const isUserEdited = await userData.editUserInfo(name, email, mobile, interest);
