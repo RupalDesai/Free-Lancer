@@ -30,11 +30,20 @@ router.get('/', isLoggedIn, (req, res) => {
 });
 
 router.post('/', async (req, res) => {
+    console.log(1);
+    
+
     let newUser = req.body;
     
+    console.log(1);
+    
+
     let username = xss(newUser.username);
     let email = services.emailToLowerCase(xss(newUser.email));
     let password = xss(newUser.password);
+
+    console.log(1);
+    console.log(newUser);
 
     // checking null values
     if(!username) {
@@ -45,14 +54,21 @@ router.post('/', async (req, res) => {
         res.status(400).send({ message: "Please provide your account password." });
     }
 
+    console.log(2);
+    
     // validating email syntax
     if (!validator.isEmail(email)) {
         res.status(400).send({ message: "Invalid email id format." });
     }
 
+    console.log(3);
+    
     // searching for an existing user
     try {
         const createUserDocument = await userData.createUser(username, email, password);
+
+    console.log(4);
+    
     } catch(error) {
         res.status(400).send({ message: error });
     }
