@@ -19,7 +19,7 @@ function isLoggedIn(req, res, next) {
         res.redirect('/user/profile');
     } else {
         return next();
-    // }
+    }
 }
 }
 

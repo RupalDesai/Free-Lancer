@@ -52,11 +52,7 @@ function submitSignUpForm(formData) {
 
             showAlert(true, "Account successfully created");
             setTimeout(() => {
-<<<<<<< HEAD
-                window.location.href = 'http://localhost:3000'
-=======
                 window.location.href = '/user/profile'
->>>>>>> 002876d100b70e4d0c9f56ca54d81d8ea2958147
             }, 600);
         },
         error: function(xhr, ajaxOptions, thrownError) {
