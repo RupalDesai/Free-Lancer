@@ -6,7 +6,9 @@ const userRoutes = express.Router();
 userRoutes.use("/sign-up", require('./sign-up')); // url: ~/user/sign-up
 userRoutes.use("/login", require('./login')); // url: ~/user/login
 userRoutes.use("/forget-password", require('./forget-password')); // url: ~/user//forget-password
+userRoutes.use("/profile", require('./profile'));
 
+// userRoutes.use("/profile", require('./profile'));
 /* non existing page configuration */
 userRoutes.use("*", (req, res) => {
 	res.render('components/errors', {
