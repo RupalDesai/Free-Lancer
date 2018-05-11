@@ -1,13 +1,15 @@
-#sign-up, #login, #forget-password {
+#sign-up, #login, #forget-password, #workspace-review {
     margin-top: 1em;
 }
-#sign-up h1, #login h1, #forget-password h1 {
+#sign-up h1, #login h1, #forget-password h1, #workspace-review h1 {
     margin: 1em 0;
 }
-#sign-up form > div:first-child, #login form > div:first-child, #forget-password form > div:first-child {
+#sign-up form > div:first-child, #login form > div:first-child, #forget-password form > div:first-child,
+#workspace-review form > div:first-child {
     padding: 0;
 }
-#sign-up .btn-primary, #login .btn-primary, #forget-password .btn-primary {
+#sign-up .btn-primary, #login .btn-primary, #forget-password .btn-primary, 
+#workspace-review .btn-primary {
     background-color: #116466;
 }
 #alert {

@@ -4,11 +4,15 @@
 */
 
 /* importing required files and packages */
+const uuid = require('uuid');
 const mongoDbCollections = require('../config/mongodb-collection');
+const workspaces = mongoDbCollections.workspaces;
 const workspaceReviews = mongoDbCollections.workspaceReviews;
+const workspaceData = require('./index').workspaces;
+const workspaceReviewData = require('./index').workspacesReviews;
 
 /* exporting controllers apis */
-module.exports = reviewsControllers = {
+let reviewsControllers = {
     /**
      * @returns {Array} List of all reviews on workspace in the database
      */
@@ -32,5 +36,91 @@ module.exports = reviewsControllers = {
             throw "Server issue in fetching workspace reviews by id";
         }
         return reviewInfo.userReviews[0].comment;
+    },
+
+    /**
+     * 
+     */
+    createReview: async function(newReview) {
+        let workspaceReview = {
+            _id: uuid.v4(),
+            totalReviews: 1,
+            userReviews: [
+                newReview
+            ]
+        };
+
+        try {
+            const reviewsCollection = await workspaceReviews();
+            const isReviewCreated = await reviewsCollection.insertOne(workspaceReview);
+            if (isReviewCreated.insertedCount === 0) throw "Issue in creating workspace review";
+            return { success: true, reviewId: workspaceReview._id };
+        } catch (err) {
+            throw err;
+        }
+    },
+
+    /**
+     * 
+     */
+    updateReview: async function(reviewsId, totalReviews, reviews) {
+        let workspaceChanges = {
+            totalReviews: totalReviews,
+            userReviews: reviews
+        }
+        try {
+            const reviewsCollection = await workspaceReviews();
+            const isReviewCreated = await reviewsCollection.updateOne({ _id: reviewsId }, { $set: workspaceChanges });
+            return { success: true };
+        } catch (err) {
+            throw err;
+        }
+    },
+
+    /**
+     * 
+     */
+    addNewReview: async function(userName, userEmail, workspaceId, comment, rating) {
+        if (!userName) throw "Please provide user name";
+        if (!userEmail) throw "Please provide user email address";
+        if (!workspaceId) throw "Please provide workspace id";
+        if (!comment) throw "Please provide comment";
+        if (!rating) throw "Please provide rating";
+
+        try {
+            const workspacesCollection = await workspaces();
+            const workspaceInfo = await workspaceData.getWorkspaceById(workspaceId);
+            let newReview = {
+                _id: uuid.v4(),
+                name: userName,
+                email: userEmail,
+                comment: comment,
+                rating: rating
+            };
+
+            if (workspaceInfo.reviewsId === null || workspaceInfo.reviewsId === '') {
+                const reviewCreatedInfo = await this.createReview(newReview);
+                const isReviewIdUpdated = await workspaceData.updateWorkspaceReviewId(workspaceId, reviewCreatedInfo.reviewId);
+                if (isReviewIdUpdated.success !== true) throw "Error in updating workspace reviews id";
+            } else {
+                const reviewInfo = await this.getReviewById(workspaceId.reviewsId);
+                let totalReviews = parseInt(totalReviews) + 1;
+                let reviews = reviewInfo.userReviews;
+                reviews.push(newReview);
+
+                const isRatingUpdated = await this.updateReview(workspaceInfo.reviewsId, totalReviews, reviews);
+                if (isRatingUpdated.success !== true) throw "Error in updating review";
+            }
+
+            const isRatingUpdated = await workspaceData.updateWorkspaceRating(workspaceId, rating, totalReviews);
+            if (isRatingUpdated.success !== true) throw "Error in updating workspace review rating";
+            return { success: true };
+        } catch(err) {
+            throw err;
+        }
     }
 };
+
+for(let key in reviewsControllers) {
+    module.exports[key] = reviewsControllers[key];
+}
