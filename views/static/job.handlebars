@@ -1,20 +1,26 @@
 
+<script src="/assets/js/jobs/jobFilterForm.js"></script>
+
+
+
   <div class="container-fluid">
     <div class="row content">
       <div class="col-sm-2 sidenav">
-        <form>
+        <form class="techFilter" id="techFilter">
           <p> Apply Technology Filter:</p>
           <p><input id="java" type="checkbox">Java</input></p>
           <p><input id="python" type="checkbox">Python</input></p>
           <p><input id="html" type="checkbox">HTML</input></p>
-          <p><input type="submit" value="Apply" onclick="submitApply()"></input></p>
+          <p><input type="button" value="Apply" onclick="submitApply()"></input></p>
       </form>
+
+    
       </div>
       <div class="col-sm-8 text-left">
-        <p> Search for Jobs:</p>
+        <h1> Search for Jobs:</h1>
         <form>
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search">
+            <input type="text" class="form-control" placeholder="Search" id="searchInput" onkeyup="searchListJob()">
             <div class="input-group-btn">
               <button class="btn btn-default" type="submit">
                 <i class="glyphicon glyphicon-search"></i>
@@ -24,36 +30,28 @@
         </form>
         
         
-        <p>Jobs List</p>
-
-
+    
+<!--//edit the jobs here-->
         <section>
-          <h1>Jobs</h1>
-          <div id="companyList" class="companyList">
-          {{#each company}}  
-            <li></li><article class="company">
+          <h1>Jobs Available</h1>
+              <ol id="companyList" class="companyList">
+              {{#each company}}   
               
-              <h2><a href="info/companyDetails/{{_id}}">{{name}}</a></h2>
-              {{#each projects}}
-                  <article class="projects"></article>
-                    <h3><a href="info/jobDetails/{{_id}}">{{title}}</a></h3>
-                    {{!-- <li>{{position}}</li> --}}
-                  </article>
+              <li><article class="company">
+                  
+              <h2><a href="/info/companyDetails/{{_id}}">{{name}}</a></h2>
+                {{#each projects}}
+                <h2><a href="/info/jobDetails/{{_id}}">{{position}}</a></h2>
+                  
+                {{/each}}
+                </article></li> 
               {{/each}}
               
-            </article>
-          {{/each}}
-        
+              </ol> 
         </section>
-
       </div>
     </div>
   </div>
 
   
-  
-
-
-
-
 

@@ -19,12 +19,15 @@ router.get('/', async (req, res) => {
     });
 
 
-router.post("/", async (req, res) => {   
+router.post("/", async (req, res) => {  
+    
     let techArray = req.body.inputTech;
 
     try {
         const companyList = await companies.getCompanies();
         const resultData = await jobFilter.applyFilter(companyList,techArray);
+       
+        console.log(resultData);
         res.status(200).send({ data: resultData });
     } catch(err) {
         throw err;
