@@ -1,33 +1,24 @@
 
-function submitApply() 
+function searchListJob() 
 {   
-    let inputTech=[];
+    var searchIn = document.getElementById("searchInput").value;    
+   
+   //alert(searchIn);
     
+   let formData = {
+    inputTech: searchIn
+}
 
-    var javaInput = document.getElementById("java");    
-    var pythonInput=document.getElementById("python");
-    var htmlInput=document.getElementById("html");
-
-    if(javaInput.checked==true)
-        inputTech.push("Java");
-    if(pythonInput.checked==true)
-        inputTech.push("Python");
-    if(htmlInput.checked==true)
-        inputTech.push("HTML");
-    
-    
-    let formData = {
-        inputTech: inputTech
-    }
-
-    getFilterResults(formData);
+    getSearchResults(formData);
+   
 }
 
 
-function getFilterResults(formData) 
+function getSearchResults(formData) 
 {
+    console.log("formData is ",formData)
     $.ajax({
-        url: "/info/job",
+        url: "/info/job/job2",
         type: "POST",
         data: JSON.stringify(formData),
         success: function(data) {

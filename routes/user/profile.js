@@ -21,10 +21,7 @@ function isLoggedIn(req, res, next) {
     }
 }
 
-router.get('/', isLoggedIn, async  (req, res) => {
-    console.log("User --> "+req.session.cookie);
-    console.log("User --> "+req.session.id);
-    
+router.get('/', isLoggedIn, async  (req, res) => {  
     
     var email = 'pgarg2@stevens.edu';
     try {
@@ -37,7 +34,7 @@ router.get('/', isLoggedIn, async  (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', isLoggedIn, async (req, res) => {
     let input = req.body;
 
     let email = 'pgarg2@stevens.edu';
