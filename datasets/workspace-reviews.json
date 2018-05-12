@@ -24,31 +24,31 @@
     "userReviews": [
         {
             "_id": "f82c6b8a-2c6a-45e2-887f-ad5f12345439",
-            "user_name": "Robert Dias",
-            "user_email": "robertd@gmail.com",
+            "name": "Robert Dias",
+            "email": "robertd@gmail.com",
             "comment": "Peaceful place to work in.",
-            "user_rating": "4.4"
+            "rating": "4.4"
         },
         {
             "_id": "f82c6b8a-2c6a-45e2-887f-ad5f12346439",
-            "user_name": "Michelle Alva",
-            "user_email": "michellea@gmail.com",
+            "name": "Michelle Alva",
+            "email": "michellea@gmail.com",
             "comment": "Good place",
-            "user_rating": "4.0"
+            "rating": "4.0"
         },
         {
             "_id": "f82c6b8a-2c6a-45e2-887f-ad5f12347439",
-            "user_name": "Good Student",
-            "user_email": "student@stevens.edu",
+            "name": "Good Student",
+            "email": "student@stevens.edu",
             "comment": "Best place to study!!",
-            "user_rating": "5.0"
+            "rating": "5.0"
         },
         {
             "_id": "f82c6b8a-2c6a-45e2-887f-ad5f12348439",
-            "user_name": "Kriti Ruhela",
-            "user_email": "kruhela@stevens.edu",
+            "name": "Kriti Ruhela",
+            "email": "kruhela@stevens.edu",
             "comment": "Best place to complete work in Hoboken",
-            "user_rating": "4.5"
+            "rating": "4.5"
         }
     ]   
 }

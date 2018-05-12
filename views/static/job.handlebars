@@ -6,8 +6,8 @@
           <p> Apply Technology Filter:</p>
           <p><input id="java" type="checkbox">Java</input></p>
           <p><input id="python" type="checkbox">Python</input></p>
-          <p><input id="c" type="checkbox">C</input></p>
-          <p><input type="submit" value="Apply"></input></p>
+          <p><input id="html" type="checkbox">HTML</input></p>
+          <p><input type="submit" value="Apply" onclick="submitApply()"></input></p>
       </form>
       </div>
       <div class="col-sm-8 text-left">
@@ -26,29 +26,31 @@
         
         <p>Jobs List</p>
 
-<!--//edit the jobs here-->
+
         <section>
           <h1>Jobs</h1>
+          <div id="companyList" class="companyList">
           {{#each company}}  
-            <article class="company">
-              <!--<label>Company</label> : {{name}} <br/>
-              -->
+            <li></li><article class="company">
+              
               <h2><a href="info/companyDetails/{{_id}}">{{name}}</a></h2>
               {{#each projects}}
                   <article class="projects"></article>
                     <h3><a href="info/jobDetails/{{_id}}">{{title}}</a></h3>
-                    <li>{{position}}</li>
+                    {{!-- <li>{{position}}</li> --}}
                   </article>
               {{/each}}
               
             </article>
           {{/each}}
+        
         </section>
 
       </div>
     </div>
   </div>
 
+  
   
 
 

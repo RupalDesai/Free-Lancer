@@ -3,16 +3,29 @@
 <div class="container">
     <div class="row">
         <div id="workspace-history" class="col-sm-6 offset-3">
-            <h1>Workspaces you have booked in past!</h1>
-            <form id="workspace-history-form">
-                <div class="form-group">
-                    <label for="workspace-name"><b>Workspace Name:</b> {{name}} </label>  
-                    <label for="workspace-email"><b>Workspace Email:</b> {{email}} </label>  
-                    <label for="workspace-phone"><b>Workspace Phone:</b> {{phone}} </label>  
-                    <label for="workspace-address"><b>Workspace Address:</b> {{address}} </label>  
+            <h1>Workspaces History</h1>
+            <div class="panel panel-default">
+                {{#each workspacesList}}
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <b>Workspace Name: </b>{{name}}
+                        </div>
+                        <div class="col-sm-6">
+                            <b>Workspace Email: </b>{{email}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <b>Workspace Phone: </b>{{phone}}
+                        </div>
+                        <div class="col-sm-6">
+                            <b>Workspace Address: </b>{{address}}
+                        </div>
+                    </div>
                 </div>
-            </form>
-            <div id="alert" class="alert" role="alert"></div>
+                {{/each}}
+            </div>
         </div>
     </div>
 </div>

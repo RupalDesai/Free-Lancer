@@ -17,9 +17,8 @@ const getCollectionFn = collection => {
 module.exports = {
     credentials: getCollectionFn("credentials"),
     companies: getCollectionFn("companies"),
+    history: getCollectionFn("history"),
     workspaces: getCollectionFn("workspaces"),
     workspaceReviews: getCollectionFn("workspaceReviews"),
-    users: getCollectionFn("users"),
-    workspaceHistory: getCollectionFn("workspaceHistory")
-  
+    users: getCollectionFn("users")
 };
