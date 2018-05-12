@@ -1,11 +1,13 @@
-#sign-up, #login, #forget-password, #profile #workspace-review {
+#sign-up, #login, #forget-password, #profile #workspace-review, #workspace-history, #job-history, #workspace-list {
     margin-top: 1em;
 }
-#sign-up h1, #login h1, #forget-password h1, #profile h1, #workspace-review h1 {
+#sign-up h1, #login h1, #forget-password h1, #profile h1, #workspace-review h1, 
+#workspace-history h1, #job-history h1, #workspace-list h1 {
     margin: 1em 0;
 }
 #sign-up form > div:first-child, #login form > div:first-child, #forget-password form > div:first-child,
-#profile form > div:first-child, #workspace-review form > div:first-child {
+#profile form > div:first-child, #workspace-review form > div:first-child
+#workspace-history div > div:first-child, #workspace-job div > div:first-child, #workspace-list div > div:first-child {
     padding: 0;
 }
 #sign-up .btn-primary, #login .btn-primary, #forget-password .btn-primary, 

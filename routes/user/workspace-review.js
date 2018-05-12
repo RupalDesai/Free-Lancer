@@ -22,14 +22,6 @@ function isLoggedIn(req, res, next) {
     }
 }
 
-router.get('/history/workspace-history', async (req, res) => {
-    res.render('history/workspace-history');
-
-});
-router.get('/history/job-history', async (req, res) => {
-    res.render('history/job-history');
-
-});
 /* global scoped function */
 router.get('/', isLoggedIn, (req, res) => {
     res.render('user/workspace-review', {
