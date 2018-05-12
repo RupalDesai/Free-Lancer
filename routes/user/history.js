@@ -12,7 +12,7 @@ function isLoggedIn(req, res, next) {
     }
 }
 
-router.get('/workspaces/', /*isLoggedIn,*/ async (req, res) => {
+router.get('/workspaces', /*isLoggedIn,*/ async (req, res) => {
 	let email = 'pgarg2@stevens.edu' //req.user.email;
 	try {
         const workspaceHistoryList = await historyData.getWorkspaceHistoryByEmail(email);
@@ -33,7 +33,35 @@ router.post('/workspaces', /*isLoggedIn,*/ async (req, res) => {
     let wAddress = req.body.address;
 
     try {
-        const workspaceHistoryList = await historyData.addNewReview(email, wName, wEmail, wPhone, wAddress);
+        const workspaceHistoryList = await historyData.addNewWorkspaceHistory(email, wName, wEmail, wPhone, wAddress);
+        res.redirect('/user/history/workspaces');
+    } catch(err) {
+        throw err;
+    }
+});
+
+router.get('/jobs', /*isLoggedIn,*/ async (req, res) => {
+	let email = 'pgarg2@stevens.edu' //req.user.email;
+	try {
+        const jobHistoryList = await historyData.getJobHistoryByEmail(email);
+		res.render('history/job-history', {
+            jobsList: jobHistoryList
+        });
+	} catch(err) {
+		throw err;
+	}
+});
+
+router.post('/jobs', /*isLoggedIn,*/ async (req, res) => {
+	let email = 'pgarg2@stevens.edu' //req.user.email;
+    
+    let project = req.body.project;
+    let position = req.body.position;
+    let start = req.body.start;
+    let end = req.body.end;
+
+    try {
+        const jobHistoryList = await historyData.addNewJobHistory(email, project, position, start, end);
         res.redirect('/user/history/jobs');
     } catch(err) {
         throw err;

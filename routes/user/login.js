@@ -51,7 +51,7 @@ async function isValid(req, res, next) {
 
 /* global scoped function */
 router.get('/', isLoggedIn, (req, res) => {    
-    res.render('user/profile');   
+    res.render('user/login');   
 });
 
 router.post('/', isValid, async (req, res) => {
