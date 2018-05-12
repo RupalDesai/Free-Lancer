@@ -33,12 +33,12 @@ function getFilterResults(formData)
             getHTML(data.data);
         },
 
-        // error: function(xhr, ajaxOptions, thrownError) 
-        // {
-        //     if(xhr.status === 400) { // receiving 404 status code
-        //         //showAlert(false, thrownError);
-        //     }
-        // },
+        error: function(xhr, ajaxOptions, thrownError) 
+        {
+            if(xhr.status === 400) { // receiving 404 status code
+                showAlert(false, thrownError);
+            }
+        },
         dataType: "json",
         contentType: "application/json"
     });
@@ -48,25 +48,19 @@ function getHTML(data) {
     var str = '';
     for (var i = 0; i < data.length; i++) {
         str += '<li><article class="company">' +
-                '<h2><a href="info/companyDetails/' + data[i]._id +  '">' + data[i].name + '</a></h2>' +
+                '<h2><a href="/info/companyDetails/' + data[i].name + '">' + data[i].name + '</a></h2>' +
                 getList(data[i].projects) + 
                 '</article></li>';
     }
     document.getElementById("companyList").innerHTML = str;
 }
 
-function getList(projects){
+function getList(projects) {
     var str = '';
     for (var i = 0; i < projects.length; i++) {
-        str += '<article class="projects">' +
-                '<h3><a href="info/jobDetails/' + projects[i]._id +  '">' + projects[i].name + '</a></h3>' +
-               '<li>' + projects[i].position + '</li>' + 
-                '</article>';
+        str += '<h2><a href="/info/jobDetails/' + projects[i]._id +'>'+ projects[i].position + '</a></h2>';
     }
-    document.getElementById("companyList").innerHTML = str;
-return str;
+    return str;
 }
-
-
 
 

@@ -12,7 +12,20 @@ const services = require('../../assets/helpers/services');
 // const userData = require('../../dao').users;
 // const services = require('../../assets/helpers/services');
 
-router.get('/', async  (req, res) => {
+function isLoggedIn(req, res, next) {
+	if (req.isAuthenticated()) {
+        // res.redirect('/user/profile');
+        res.redirect('/user/profile');
+    } else {
+        return next();
+    }
+}
+
+router.get('/', isLoggedIn, async  (req, res) => {
+    console.log("User --> "+req.session.cookie);
+    console.log("User --> "+req.session.id);
+    
+    
     var email = 'pgarg2@stevens.edu';
     try {
         const userInfo = await userData.getUserById(email);

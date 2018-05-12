@@ -18,6 +18,7 @@ let filterController = {
             }
         }
         resultArray = resultArray.filter((x, i, a) => a.indexOf(x) == i)
+        console.log(resultArray);
         return resultArray;
     }
 };
