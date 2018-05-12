@@ -1,7 +1,5 @@
 
-<script src="/assets/js/jobs/jobFilterForm.js"></script>
-<script src="/assets/js/jobs/jobSearchForm.js"></script>
-
+<script src="/assets/js/jobs/job-search.js"></script>
 
   <div class="container-fluid">
     <div class="row content">
@@ -11,45 +9,31 @@
           <p><input id="java" type="checkbox">Java</input></p>
           <p><input id="python" type="checkbox">Python</input></p>
           <p><input id="html" type="checkbox">HTML</input></p>
-          <p><input type="button" value="Apply" onclick="submitApply()"></input></p>
+          <p><input type="button" value="Apply" onclick="filter()"></input></p>
       </form>
-
+    </div>
+    <div class="col-sm-8 text-left">
+      <h1> Search for Jobs:</h1>
+      <form>
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" id="searchInput" name="searchInput" onkeyup="searchBar()"></input>
+        </div>
+      </form>
     
-      </div>
-      <div class="col-sm-8 text-left">
-        <h1> Search for Jobs:</h1>
-        <form>
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search" id="searchInput" oninput="searchListJob()"></input>
-            <div class="input-group-btn">
-              
-            </div>
-          </div>
-        </form>
-        
-        
-    
-<!--//edit the jobs here-->
-        <section>
-          <h1>Jobs Available</h1>
-              <ol id="companyList" class="companyList">
-              {{#each company}}   
-              
-              <li><article class="company">
-                  
-              <h2><a href="/info/companyDetails/{{_id}}">{{name}}</a></h2>
-                {{#each projects}}
-                <h2><a href="/info/jobDetails/{{_id}}">{{position}}</a></h2>
-                  
-                {{/each}}
-                </article></li> 
-              {{/each}}
-              
-              </ol> 
-        </section>
-      </div>
+      <!--//edit the jobs here-->
+      <section>
+        <h1>Jobs Available</h1>
+          <ol id="companyList" class="companyList">
+          {{#each company}}   
+          <li><article class="company">
+            <h2><a href="/info/companyDetails/{{_id}}">{{name}}</a></h2>
+            {{#each projects}}
+            <h4><a href="/info/jobDetails/{{_id}}">{{position}}</a></h4>
+            {{/each}}
+          </article></li> 
+          {{/each}}
+          </ol> 
+      </section>
     </div>
   </div>
-
-  
-
+</div>
