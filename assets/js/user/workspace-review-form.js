@@ -1,9 +1,9 @@
 /**
  * Validates the form fields
  */
-function validateWorkspaceReviewForm() {
+function validateWorkspaceReviewForm(id) {
     const comment = document.getElementsByName("comment")[0].value;
-    const rating = document.getElementsByName("rating")[0].value;
+    const rating =  document.getElementsByName("rating")[0].value.toString();
 
     // Validation
     var isFormValid = false;
@@ -14,7 +14,7 @@ function validateWorkspaceReviewForm() {
             comment: comment,
             rating: rating
         };
-        submitWorkspaceReviewForm(formData);
+        submitWorkspaceReviewForm(formData, id);
     }
 }
 
@@ -34,9 +34,9 @@ function showAlert(isSuccess, message) {
  * Submits the form
  * @param {Object} formData Data to be passed in the database
  */
-function submitWorkspaceReviewForm(formData) {
+function submitWorkspaceReviewForm(formData, id) {
     $.ajax({
-        url: "/user/workspace-review",
+        url: `/user/workspace-review/${id}`,
         type: "POST",
         data: JSON.stringify(formData),
         success: function(data) {

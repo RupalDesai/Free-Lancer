@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const userData = require('../../dao').users;
 const historyData = require('../../dao').history;
+const workspaceData = require('../../dao').workspaces;
 
 function isLoggedIn(req, res, next) {
 	if (req.isAuthenticated()) {
@@ -15,9 +16,14 @@ function isLoggedIn(req, res, next) {
 router.get('/workspaces', /*isLoggedIn,*/ async (req, res) => {
 	let email = 'pgarg2@stevens.edu' //req.user.email;
 	try {
-        const workspaceHistoryList = await historyData.getWorkspaceHistoryByEmail(email);
+        const wHisList = await historyData.getWorkspaceHistoryByEmail(email);
+        let wList = [];
+
+        for (let i in wHisList) {
+            wList.push(await workspaceData.findWorkspaceId(wHisList[i].name, wHisList[i].email, wHisList[i].phone, wHisList[i].address));
+        }
 		res.render('history/workspace-history', {
-            workspacesList: workspaceHistoryList
+            workspacesList: wList
         });
 	} catch(err) {
 		throw err;

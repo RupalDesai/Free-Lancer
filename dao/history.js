@@ -21,7 +21,7 @@ let historyControllers = {
         return true;
     },
 
-    /**
+        /**
      * @returns {Object} An object of workspace history collection
      */
     getWorkspaceHistoryByEmail: async function (email) {

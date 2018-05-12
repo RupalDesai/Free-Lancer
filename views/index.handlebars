@@ -6,15 +6,15 @@
         <div id="left-panel" class="col-sm-6">
             <label for="job-search"><h1>Find a Job!</h1></label>
             <p>Lorem ipsum dolor sit amet, ut id, vestibulum nec wisi vel scelerisque ut, et vestibulum risus enim vestibulum, vehicula ante, tortor erat non. Quis luctus, sed vestibulum urna dui eu rerum ac, nonummy commodo.</p>
-            <input type="text" placeholder="Find a Job" name="job-search">
-            <span><a href="/jobs"><img src="/assets/images/search-btn.png"></a></span>
+            <a href="/info/job"><input type="button" value="Find a Job" name="job-search" style="background-color: #116466"></a>
+            <!-- span><a href="/jobs"><img src="/assets/images/search-btn.png"></a></span -->
         </div>
 
         <div id="right-panel" class="col-sm-6">
             <label for="job-search"><h1>Find a Workspace!</h1></label>
             <p>Lorem ipsum dolor sit amet, ut id, vestibulum nec wisi vel scelerisque ut, et vestibulum risus enim vestibulum, vehicula ante, tortor erat non. Quis luctus, sed vestibulum urna dui eu rerum ac, nonummy commodo.</p>
-            <input type="text" placeholder="Find a Workspace" name="workspace-search">
-            <span><a href="/workspaces"><img src="/assets/images/search-btn.png"></a></span>
+            <a href="/info/workspace"><input type="button" value="Find a Workspace" name="workspace-search" style="background-color: #2c3531"></a>
+            <!--span><a href="/workspaces"><img src="/assets/images/search-btn.png"></a></span -->
         </div>
     </div>
     <!-- partition panel section ends here -->
@@ -44,7 +44,7 @@
                     {{/if}}
                     
                     <div class="col-sm-12">
-                        <a>Apply Now</a>
+                        <a href="/info/jobDetails/{{projects.[0]._id}}">Apply Now</a>
                     </div>
                 </div>
                 {{/each}}
@@ -73,7 +73,7 @@
                         <div class="col-sm-6"><b>Opens at: </b>{{opensAt}}</div>
                     </div>
                     <div class="col-sm-12">
-                        <a href="/workspaces/book-now">Book Now</a>
+                        <a href="/info/workspaceDetails/{{_id}}">Book Now</a>
                     </div>
                 </div>
                 {{/each}}

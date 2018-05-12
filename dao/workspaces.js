@@ -12,6 +12,19 @@ const workspaces = mongoDbCollections.workspaces;
 /* exporting controllers apis */
 let workspacesControllers = {
     /**
+     * 
+     */
+    findWorkspaceId: async function (wName, wEmail, wPhone, wAddress) {
+        try {
+            const workspacesCollection = await workspaces();
+            let workspacesList = await workspacesCollection.findOne({ name: wName, email: wEmail, phone: wPhone, address: wAddress });
+            return workspacesList;
+        } catch(err){
+            throw err;
+        }
+    },
+
+    /**
      * @returns {Array} List of all workspaces in the database
      */
     getWorkspaces: async function () {
@@ -53,9 +66,8 @@ let workspacesControllers = {
      */
     getWorkspaceById: async function(id) {
         if (!id) throw "Please provide the workspace id";
-        
         const workspacesCollection = await workspaces();
-        const workspaceInfo = await workspacesCollection.findOne({ _id: id});
+        const workspaceInfo = await workspacesCollection.findOne({ _id: id });
         if (workspaceInfo === null) {
             throw "Server issue in fetching workspace by id";
         }
@@ -71,9 +83,11 @@ let workspacesControllers = {
         if (!totalReviews) throw "Please provide reviews counts";
 
         try {
-            const reviewInfo = await this.getReviewById(workspaceId);
+            const reviewInfo = await this.getWorkspaceById(workspaceId);
             let newRating = ((parseFloat(reviewInfo.rating) * (totalReviews - 1)) + parseFloat(rating)) / totalReviews;
-            const isRatingUpdated = await reviewsCollection.updateOne({ _id: workspaceId }, { $set: { rating: newRating }});
+            
+            const workspacesCollection = await workspaces();
+            const isRatingUpdated = await workspacesCollection.updateOne({ _id: workspaceId }, { $set: { rating: newRating }});
             return { success: true };
         } catch(err) {
             throw err;
@@ -87,7 +101,9 @@ let workspacesControllers = {
         if (!workspaceId) throw "Please provide workspace id";
         try {
             const reviewInfo = await this.getReviewById(workspaceId);
-            const isRatingUpdated = await reviewsCollection.updateOne({ _id: workspaceId }, { $set: { reviewsId: reviewsId }});
+
+            const workspacesCollection = await workspaces();
+            const isRatingUpdated = await workspacesCollection.updateOne({ _id: workspaceId }, { $set: { reviewsId: reviewsId }});
         } catch(err) {
             throw err;
         }

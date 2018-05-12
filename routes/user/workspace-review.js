@@ -12,6 +12,7 @@ const validator = require('validator');
 const passport = require('../../config/passport-user');
 const services = require('../../assets/helpers/services');
 const userData = require('../../dao').users;
+const workData = require('../../dao').workspaces;
 const reviewsData = require('../../dao').workspacesReviews;
 
 function isLoggedIn(req, res, next) {
@@ -23,11 +24,17 @@ function isLoggedIn(req, res, next) {
 }
 
 /* global scoped function */
-router.get('/', isLoggedIn, (req, res) => {
-    res.render('user/workspace-review', {
-        mainTitle: "Add a review •",
-        mainDescription: "Welcome to the Free Lancer | A search engine to find a best job and workspace."
-    });
+router.get('/:id', isLoggedIn, async (req, res) => {
+    try {
+        const workspace = await workData.getWorkspaceById(req.params.id);
+        res.render('user/workspace-review', {
+            mainTitle: "Add a review •",
+            mainDescription: "Welcome to the Free Lancer | A search engine to find a best job and workspace.",
+            workspacesList: workspace
+        });
+    } catch(err) {
+        throw err;
+    }
 });
 
 router.post('/:id', async (req, res) => {
@@ -50,7 +57,8 @@ router.post('/:id', async (req, res) => {
     // searching for an existing user
     try {
         const isReviewCreated = await reviewsData.addNewReview(user.name, user.email, workspaceId, comment, rating);
-        if (isReviewCreated.success === true) {
+        
+    if (isReviewCreated.success === true) {
             res.status(200).send({ message: "Review created successfully" });
         } else {
             res.status(400).send({ message: "Unknow error occurred" });

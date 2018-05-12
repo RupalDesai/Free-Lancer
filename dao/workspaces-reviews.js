@@ -8,8 +8,7 @@ const uuid = require('uuid');
 const mongoDbCollections = require('../config/mongodb-collection');
 const workspaces = mongoDbCollections.workspaces;
 const workspaceReviews = mongoDbCollections.workspaceReviews;
-const workspaceData = require('./index').workspaces;
-const workspaceReviewData = require('./index').workspacesReviews;
+const workspaceData = require('./workspaces');
 
 /* exporting controllers apis */
 let reviewsControllers = {
@@ -36,6 +35,19 @@ let reviewsControllers = {
             throw "Server issue in fetching workspace reviews by id";
         }
         return reviewInfo.userReviews[0].comment;
+    },
+
+    /**
+     * @returns {String} A top review comment
+     */
+    getAllReviewById: async function(id) {
+        if (!id) throw "Please provide the reviews id";
+        const reviewsCollection = await workspaceReviews();
+        const reviewInfo = await reviewsCollection.findOne({ _id: id });
+        if (reviewInfo === null) {
+            throw "Server issue in fetching workspace reviews by id";
+        }
+        return reviewInfo;
     },
 
     /**
@@ -88,7 +100,6 @@ let reviewsControllers = {
         if (!rating) throw "Please provide rating";
 
         try {
-            const workspacesCollection = await workspaces();
             const workspaceInfo = await workspaceData.getWorkspaceById(workspaceId);
             let newReview = {
                 _id: uuid.v4(),
@@ -98,22 +109,27 @@ let reviewsControllers = {
                 rating: rating
             };
 
-            if (workspaceInfo.reviewsId === null || workspaceInfo.reviewsId === '') {
+            let totalReviews = 1;
+            if (workspaceInfo.reviewsId === undefined || workspaceInfo.reviewsId === '') {
                 const reviewCreatedInfo = await this.createReview(newReview);
                 const isReviewIdUpdated = await workspaceData.updateWorkspaceReviewId(workspaceId, reviewCreatedInfo.reviewId);
                 if (isReviewIdUpdated.success !== true) throw "Error in updating workspace reviews id";
             } else {
-                const reviewInfo = await this.getReviewById(workspaceId.reviewsId);
-                let totalReviews = parseInt(totalReviews) + 1;
+                const reviewInfo = await this.getAllReviewById(workspaceInfo.reviewsId);
+                totalReviews = parseInt(reviewInfo.totalReviews) + 1;
                 let reviews = reviewInfo.userReviews;
                 reviews.push(newReview);
 
                 const isRatingUpdated = await this.updateReview(workspaceInfo.reviewsId, totalReviews, reviews);
                 if (isRatingUpdated.success !== true) throw "Error in updating review";
             }
-
+        console.log('e1');
+            
             const isRatingUpdated = await workspaceData.updateWorkspaceRating(workspaceId, rating, totalReviews);
             if (isRatingUpdated.success !== true) throw "Error in updating workspace review rating";
+
+        console.log('h');
+        
             return { success: true };
         } catch(err) {
             throw err;
