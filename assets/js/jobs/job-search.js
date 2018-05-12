@@ -63,7 +63,7 @@ function getHTML(data) {
 function getList(projects) {
     var str = '';
     for (var i = 0; i < projects.length; i++) {
-        str += '<div><h2><a href="/info/jobDetails/' + projects[i]._id +'>'+ projects[i].position + '</a></h2><div>';
+        str += '<div><h3><a href="/info/jobDetails/' + projects[i]._id +'>'+ projects[i].position + '</a></h3><div>';
     }
     return str;
 }

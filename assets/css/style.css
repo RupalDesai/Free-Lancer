@@ -18,3 +18,10 @@ ul li {
 .hide {
     visibility: hidden;
 }
+
+a { 
+    color: black;
+}
+h3{
+    font-size: 1.5em;
+}
