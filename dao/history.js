@@ -48,13 +48,14 @@ let historyControllers = {
         try {
             const historyCollection = await history();
             const isUserHistory = await this.isUserHasHistory(email);
-
+        
             let newHistoryInfo = {
                 name: wName,
                 email: wEmail,
                 phone: wPhone,
                 address: wAddress
             };
+        
             if (isUserHistory) {
                 const wHistoryInfo = await this.getWorkspaceHistoryByEmail(email);
                 if (wHistoryInfo === null || wHistoryInfo === undefined) {
@@ -102,11 +103,13 @@ let historyControllers = {
         if (!email) throw "Please provide user email";
         if (!newHistoryInfo) throw "Please provide workspace details";
 
-        let newInfo = { };
+        let newInfo = {};
+        newInfo['workspacesList'] = [ newHistoryInfo ];
         try {
-            const workList = await this.getWorkspaceHistoryByEmail(email);
-            newInfo['workspacesList'] = workList.push(newHistoryInfo);
-
+            let workDoc = await this.getWorkspaceHistoryByEmail(email);
+            workDoc.forEach((work) => {
+                newInfo['workspacesList'].push(work);
+            });
             const historyCollection = await history();
             const isHistoryCreated = await historyCollection.updateOne({ _id: email }, { $set: newInfo });
             return { success: true };
@@ -135,7 +138,6 @@ let historyControllers = {
         }
     },
 
-
     /**
      * @returns {Object} An object of job history collection
      */
@@ -148,7 +150,111 @@ let historyControllers = {
             throw "Server issue in getting job history list with 'history' collection";
         }
         return historyInfo.jobsList;
-    }
+    },
+
+     /**
+     * 
+     */
+    addNewJobHistory: async function(email, project, position, start, end) {
+        if (!email) throw "Please provide user email";
+        if (!project) throw "Please provide job project";
+        if (!position) throw "Please provide job position";
+        if (!start) throw "Please provide job start date";
+        if (!end) throw "Please provide job end date";
+
+        try {
+            const historyCollection = await history();
+            const isUserHistory = await this.isUserHasHistory(email);
+        
+            let newHistoryInfo = {
+                project: project,
+                position: position,
+                start: start,
+                end: end
+            };
+        
+            if (isUserHistory) {
+                const wHistoryInfo = await this.getJobHistoryByEmail(email);
+                if (wHistoryInfo === null || wHistoryInfo === undefined) {
+                    const isJobistoryCreated = await this.insertJobHistory(email, newHistoryInfo);
+                    if (isJobistoryCreated.success !== true) throw "Error in creating job history";
+                } else {
+                    const isJobistoryCreated = await this.updateJobHistory(email, newHistoryInfo);
+                    if (isJobistoryCreated.success !== true) throw "Error in creating job history";
+                }
+            } else {
+                const isJobistoryCreated = await this.createJobHistory(email, newHistoryInfo);
+                if (isJobistoryCreated.success !== true) throw "Error in creating job history";
+            }
+            return { success: true };
+        } catch(err) {
+            throw err;
+        }
+    },
+
+    /**
+     * 
+     */
+    insertJobHistory: async function(email, newHistoryInfo) {
+        if (!email) throw "Please provide user email";
+        if (!newHistoryInfo) throw "Please provide workspace details";
+
+        let newInfo = { 
+            jobsList: [
+                newHistoryInfo
+            ]
+        };
+        try {
+            const historyCollection = await history();
+            const isHistoryCreated = await historyCollection.updateOne({ _id: email }, { $set: newInfo });
+            return { success: true };
+        } catch (err) {
+            throw err;
+        }
+    },
+
+    /**
+     * 
+     */
+    updateJobHistory: async function(email, newHistoryInfo) {
+        if (!email) throw "Please provide user email";
+        if (!newHistoryInfo) throw "Please provide workspace details";
+
+        let newInfo = {};
+        newInfo['jobsList'] = [ newHistoryInfo ];
+        try {
+            let jobDoc = await this.getJobHistoryByEmail(email);
+            jobDoc.forEach((job) => {
+                newInfo['jobsList'].push(job);
+            });
+            const historyCollection = await history();
+            const isHistoryCreated = await historyCollection.updateOne({ _id: email }, { $set: newInfo });
+            return { success: true };
+        } catch (err) {
+            throw err;
+        }
+    },
+
+    /**
+     * 
+     */
+    createJobHistory: async function(email, newHistoryInfo) {
+        if (!email) throw "Please provide user email";
+        if (!newHistoryInfo) throw "Please provide workspace details";
+        let newInfo = { 
+            _id: email,
+            jobsList: [ newHistoryInfo ]
+        };
+        try {
+            const historyCollection = await history();
+            const isHistoryCreated = await historyCollection.insert(newInfo);
+            if (isHistoryCreated.insertedCount === 0) throw "Error in creating workspace history";
+            return { success: true };
+        } catch(err) {
+            throw err;
+        }
+    },
+
 };
 
 for(let key in historyControllers) {
